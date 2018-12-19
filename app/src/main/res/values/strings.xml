@@ -1,0 +1,86 @@
+<resources>
+    <string name="app_name">汕大课程表</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <!--drawer-->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string-array name="query_lib">
+        <item>anywords</item>
+        <item>title_f</item>
+        <item>title</item>
+        <item>author_f</item>
+        <item>author</item>
+        <item>keyword_f</item>
+        <item>publisher_f</item>
+        <item>clc_f</item>
+        <item>isbn_f</item>
+        <item>issn_f</item>
+        <item>callno_f</item>
+    </string-array>
+
+    <string-array name="query_lib_string">
+        <item>任意字段关键词</item>
+        <item>题名前方一致</item>
+        <item>题名内关键词</item>
+        <item>著者前方一致</item>
+        <item>著者内关键词</item>
+        <item>内容主题词</item>
+        <item>出版者名称</item>
+        <item>中图法分类号</item>
+        <item>ISBN</item>
+        <item>ISSN</item>
+        <item>索取号</item>
+    </string-array>
+
+    <string-array name="query_lib_ob_string">
+        <item>降序排列</item>
+        <item>升序排列</item>
+    </string-array>
+
+    <string-array name="query_lib_ob">
+        <item>DESC</item>
+        <item>ASC</item>
+    </string-array>
+
+    <string-array name="query_lib_sf_string">
+        <item>题名</item>
+        <item>出版社</item>
+        <item>出版年</item>
+        <item>著者</item>
+        <item>主题词</item>
+        <item>分类号</item>
+        <item>进馆日期</item>
+    </string-array>
+
+    <string-array name="query_lib_sf">
+        <item>M_TITLE</item>
+        <item>M_PUBLISHER</item>
+        <item>M_PUB_YEAR</item>
+        <item>M_AUTHOR</item>
+        <item>M_SUBJECT</item>
+        <item>M_CLC</item>
+        <item>M_CATALOGDATE</item>
+    </string-array>
+
+    <string-array name="detail_time">
+        <item>08:00 - 08:45</item>
+        <item>08:55 - 09:40</item>
+        <item>10:00 - 10:45</item>
+        <item>10:55 - 11:40</item>
+        <item>11:50 - 12:35</item>
+        <item>14:00 - 14:45</item>
+        <item>14:55 - 15:40</item>
+        <item>16:00 - 16:45</item>
+        <item>16:55 - 17:40</item>
+        <item>17:50 - 18:35</item>
+        <item>19:20 - 20:05</item>
+        <item>20:15 - 21:00</item>
+        <item>21:10 - 21:55</item>
+    </string-array>
+
+    <string name="UNAUTHORIZED">登陆超时,请同步课表</string>
+
+</resources>

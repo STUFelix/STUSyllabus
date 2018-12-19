@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tv_sticky_header_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/greyF6Color"
+    android:orientation="horizontal">
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/defaultDarkBackgroundSelect"/>
+
+    <TextView
+        android:id="@+id/stickyTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:textColor="@color/grey66Color"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:text="吸顶文本"/>
+</LinearLayout>

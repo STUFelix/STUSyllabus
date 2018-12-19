@@ -1,0 +1,194 @@
+apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
+apply plugin: 'AndResGuard'
+apply plugin: 'android-apt'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "27.0.3"
+
+    //useLibrary 'org.apache.http.legacy'
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    //65535
+    dexOptions {
+        jumboMode = true
+    }
+
+//    configurations.all {
+//        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+//            def requested = details.requested
+//            if (requested.group == 'com.android.support') {
+//                if (!requested.name.startsWith("multidex")) {
+//                    details.useVersion '25.3.1'
+//                }
+//            }
+//        }
+//    }
+
+    configurations.all {
+        exclude module: 'rxjava'
+        exclude module: 'rxandroid'
+        exclude module: 'gson'
+        exclude group: 'com.squareup.okio', module: 'okio'
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
+
+    signingConfigs {
+        releaseConfig {
+            keyAlias 'stu_syllabus'
+            keyPassword 'bueryang99'
+            storeFile file('./stu_syllabus.jks')
+            storePassword 'bueryang99'
+            v2SigningEnabled false
+        }
+    }
+
+    defaultConfig {
+        applicationId "com.hjsmallfly.syllabus"
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 52
+        versionName "2.1.1.1"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    defaultConfig {
+        resConfigs "zh"
+        multiDexEnabled true
+    }
+}
+
+//添加本地仓库
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+andResGuard {
+    // mappingFile = file("./resource_mapping.txt")
+    mappingFile = null
+    use7zip = true
+    useSign = true
+    // it will keep the origin path of your resources when it's true
+    keepRoot = false
+    whiteList = [
+            // your icon
+            "R.drawable.icon",
+            // for fabric
+            "R.string.com.crashlytics.*",
+            // for umeng update
+            "R.string.umeng*",
+            "R.string.UM*",
+            "R.string.tb_*",
+            "R.layout.umeng*",
+            "R.layout.tb_*",
+            "R.drawable.umeng*",
+            "R.drawable.tb_*",
+            "R.anim.umeng*",
+            "R.color.umeng*",
+            "R.color.tb_*",
+            "R.style.*UM*",
+            "R.style.umeng*",
+            "R.id.umeng*",
+            // umeng share for sina
+            "R.drawable.sina*",
+            // for google-services.json
+            "R.string.google_app_id",
+            "R.string.gcm_defaultSenderId",
+            "R.string.default_web_client_id",
+            "R.string.ga_trackingId",
+            "R.string.firebase_database_url",
+            "R.string.google_api_key",
+            "R.string.google_crash_reporting_api_key"
+    ]
+    compressFilePattern = [
+            "*.png",
+            "*.jpg",
+            "*.jpeg",
+            "*.gif",
+            "resources.arsc"
+    ]
+    sevenzip {
+        artifact = 'com.tencent.mm:SevenZip:1.2.5'
+        //path = "/usr/local/bin/7za"
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile project(path: ':galleryfinal')
+    compile('com.github.ozodrukh:CircularReveal:2.0.1@aar') {
+        transitive = true
+    }
+    //    LeakCanary
+    compile files('libs/joda-time-2.1.jar')
+
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:palette-v7:25.3.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
+
+    compile 'com.balysv:material-ripple:1.0.2'
+    compile 'com.google.code.gson:gson:2.7'
+
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+
+    //Bmob
+    compile 'cn.bmob.android:bmob-sdk:3.5.0'
+
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.1.7'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.zzhoujay.materialcolors:materialcolors:1.0.0'
+    compile 'com.facebook.fresco:fresco:0.12.0'
+    compile 'com.jakewharton:butterknife:8.2.1'
+
+    //convenientbanner
+    compile 'com.bigkoo:convenientbanner:2.0.5'
+    compile 'com.github.nekocode:Emojix:1.1'
+    compile 'me.relex:photodraweeview:1.0.0'
+    compile 'id.zelory:compressor:1.0.2'
+    compile 'com.bartoszlipinski:recyclerviewheader2:2.0.1'
+    compile 'org.jsoup:jsoup:1.9.2'
+    compile 'com.squareup.retrofit2:converter-scalars:2.1.0'
+    compile 'info.hoang8f:fbutton:1.0.5'
+    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.7.0@aar'
+    compile 'com.orhanobut:logger:1.15'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+    compile 'com.github.ybq:Endless-RecyclerView:1.0.3'
+    apt 'com.jakewharton:butterknife-compiler:8.2.1'
+    //  dagger
+    compile 'javax.annotation:jsr250-api:1.0'
+    compile 'com.google.dagger:dagger:2.0.1'
+    apt 'com.google.dagger:dagger-compiler:2.0.1'
+    compile files('libs/libammsdk.jar')
+    compile 'com.tencent.bugly:crashreport:2.6.5'
+    compile 'com.umeng.analytics:analytics:6.0.4'
+    // https://github.com/bumptech/glide
+    compile 'com.github.bumptech.glide:glide:3.8.0'
+    compile 'jp.wasabeef:glide-transformations:2.0.2'
+}

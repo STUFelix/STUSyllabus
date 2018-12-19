@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
+
+        <TextView
+            android:id="@+id/gradeNameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="14sp"
+            tools:text="程序设计基础"/>
+
+        <View
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/defaultShowColor"/>
+
+        <TextView
+            android:id="@+id/gradeTextView"
+            android:layout_width="72dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="14sp"
+            tools:text="93"/>
+
+        <View
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/defaultShowColor"/>
+
+        <TextView
+            android:id="@+id/creditTextView"
+            android:layout_width="72dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="14sp"
+            tools:text="4.0"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/div_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="8dp"
+        android:background="@color/defaultShowColor"/>
+
+</LinearLayout>

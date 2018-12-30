@@ -1,15 +1,19 @@
 package com.example.daidaijie.syllabusapplication.mystu;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.example.daidaijie.syllabusapplication.App;
 import com.example.daidaijie.syllabusapplication.R;
+import com.example.daidaijie.syllabusapplication.base.BaseActivity;
 import com.example.daidaijie.syllabusapplication.bean.Semester;
 import com.example.daidaijie.syllabusapplication.bean.UserLogin;
 
@@ -22,16 +26,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
 
-public class MyStuMainActivity extends AppCompatActivity {
+public class MyStuMainActivity extends BaseActivity {
 
 
     /**Created by STUFelix
      * 2018.12
      * */
+
+    @BindView(R.id.titleTextView)
+    TextView mTitleTextView;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    private SwipeRefreshLayout refreshLayout;
+
 
     private String cookies ="";
     private String year = "";
@@ -41,6 +53,7 @@ public class MyStuMainActivity extends AppCompatActivity {
 
     private ListView listView;
     private CourseListAdapter mc_adapter;
+
 
     private int PcourseNum = -1;
 
@@ -69,12 +82,18 @@ public class MyStuMainActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg){
             if (msg.what ==20002){
-                String mcourseobj=msg.obj.toString();
+                if(msg.obj != null) {
+                    String mcourseobj = msg.obj.toString();
 
-                toParseJson(mcourseobj);//解析返回的courseList 的json数据
+                    toParseJson(mcourseobj);//解析返回的courseList 的json数据
 
-                toRequestAdapter();//将数据关联到adapter，并在其中嵌套活动的跳转
-
+                    toRequestAdapter();//将数据关联到adapter，并在其中嵌套活动的跳转
+                }
+                /**
+                else{
+                  还是没有解决若本学期无课程，课程无数据，如何提醒用户的问题。
+                    forHint();//无用，哪怕这学期无课程，这个方法也没有被调用，可能说明都没进行sendMessage();
+                }*/
             }
         }
     };
@@ -90,16 +109,29 @@ public class MyStuMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mystu_courselist);
         listView = (ListView) findViewById(R.id.mystu_course_listview);
+        refreshLayout = (SwipeRefreshLayout)findViewById(R.id.refreshLayout);
 
-        getUserInfo();//获取用户账号、密码、学年与学期
-
-        /*需要通过handler拿到用户Cookie*/
+        /**
+         * 有一个问题 如何在没网络的情况，导致网络请求失败后，然后手动操作连上了网，如何实现自动的再次网络请求，而无需手动退出，再进一次界面进行网络请求
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {//设置刷新监听器
+         @Override
+         public void onRefresh() {
+         refreshLayout.setRefreshing(true);
         CookiesRequest mCookiesRequest = new CookiesRequest(cookiesUserName,cookiesPassword,cookiesHandler,MyStuMainActivity.this);
         mCookiesRequest.getCookies();
     }
+});
+         */
+        setupTitleBar(mToolbar);
 
+        getUserInfo();//获取用户账号、密码、学年与学期
+        toGetCookie();//获取Cookie 然后自动请求课程列表
+    }
+
+    protected int getContentView(){
+        return R.layout.mystu_courselist;
+    }
 
 /** 获取用户账号、密码、学年与学期
  **/
@@ -115,6 +147,14 @@ public class MyStuMainActivity extends AppCompatActivity {
                 season = semester.getSeason();
             }
         }
+    }
+
+    public void toGetCookie(){
+        refreshLayout.setEnabled(true);
+        refreshLayout.setRefreshing(true);
+        /*需要通过handler拿到用户Cookie*/
+        CookiesRequest mCookiesRequest = new CookiesRequest(cookiesUserName,cookiesPassword,cookiesHandler,MyStuMainActivity.this);
+        mCookiesRequest.getCookies();
     }
 
     /**调用此函数
@@ -138,6 +178,13 @@ public class MyStuMainActivity extends AppCompatActivity {
                 Plist.add(map);
             }
 
+            if(PcourseNum == 0){
+                forHint();
+            }
+
+            refreshLayout.setRefreshing(false);
+            refreshLayout.setEnabled(false);
+
             /**如果本学期没有mystu，进行toast显示提示用户
              * **/
 
@@ -147,10 +194,6 @@ public class MyStuMainActivity extends AppCompatActivity {
     }
 
     private void toRequestAdapter(){
-
-        if(Plist.size() ==0 || Plist.isEmpty() || PcourseNum <= 0){
-            Toast.makeText(this,"本学期暂无mystu资料",Toast.LENGTH_LONG);
-        }
 
         mc_adapter = new CourseListAdapter(this,    Plist);
 
@@ -186,7 +229,21 @@ public class MyStuMainActivity extends AppCompatActivity {
             }
         });
     }
+    private  void forHint(){
+        AlertDialog.Builder normalDialog
+                = new AlertDialog.Builder(this)
+                .setTitle("  -温馨提示")
+                .setMessage("\n\n本学期暂无课程\n")
+                .setPositiveButton("好吧~", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        normalDialog.create().show();
+    }
 }
+
 
 
 /**

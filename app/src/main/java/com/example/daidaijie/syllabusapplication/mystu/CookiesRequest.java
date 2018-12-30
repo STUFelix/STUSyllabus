@@ -96,7 +96,7 @@ public  class  CookiesRequest {
             //请求失败时回调
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable throwable) {
-                Toast.makeText(context,"Cookies请求失败",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Cookies请求失败——请检查网络",Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -148,6 +148,11 @@ public class CourseWorkUtil {
 
 
     public static String getName(int position) {
+        String str ="";
+        if(worklistNum == 0){
+            str ="本课程无作业";
+            return str;
+        }
         return Wlist.get(position % worklistNum).get("assignTitle");
     }
 

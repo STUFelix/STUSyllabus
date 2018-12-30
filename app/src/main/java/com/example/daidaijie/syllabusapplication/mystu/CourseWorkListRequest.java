@@ -76,12 +76,6 @@ public class CourseWorkListRequest {
                     worklistmsg.what = 30003;
                     worklistmsg.obj = jsonObject;
 
-
-                    String judgeStr =jsonObject.toString();
-                    if(judgeStr.length() ==0 || judgeStr ==null){
-                        Toast.makeText(context,"此课程暂无作业",Toast.LENGTH_LONG).show();
-                    }
-
                     courseworklistHandler.sendMessage(worklistmsg);
 
                 } catch (IOException e) {

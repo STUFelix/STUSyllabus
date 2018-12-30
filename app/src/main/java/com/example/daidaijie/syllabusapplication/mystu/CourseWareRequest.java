@@ -77,11 +77,12 @@ public class CourseWareRequest {
                     courseListmsg.obj = jsonObject;
 
                     /**判空，提示用户。
-                     * */
-                    String judgeStr =jsonObject.toString();
+
+                    String judgeStr =jsonObject.toString(); // 若jsonObject为空，然后toString会报空指针异常的，故后面的无法显示！
                     if(judgeStr.length() ==0 || judgeStr ==null){
                         Toast.makeText(context,"此课程暂无课件",Toast.LENGTH_LONG).show();
                     }
+                     * */
 
                     coursewareHandler.sendMessage(courseListmsg);
 

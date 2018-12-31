@@ -3,6 +3,7 @@ package com.example.daidaijie.syllabusapplication.mystu;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -23,16 +24,18 @@ public class CourseWareRequest {
     public  String cookies;
     public  String course_linkid;
     private Context context;
+    private SwipeRefreshLayout refreshLayout;
 
     CourseWareRequest(){
 
     }
 
-    CourseWareRequest(String tCookies, String tYears,Handler thandler,Context context){
+    CourseWareRequest(String tCookies, String tYears,Handler thandler,Context context,SwipeRefreshLayout refreshLayout){
         this.cookies = tCookies;
         this.course_linkid = tYears;
         this.coursewareHandler =thandler;
         this.context=context;
+        this.refreshLayout =refreshLayout;
     }
 
     public  void getCourseWare() {
@@ -97,6 +100,7 @@ public class CourseWareRequest {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable throwable) {
                 Toast.makeText(context,"课件列表数据请求失败",Toast.LENGTH_SHORT).show();
+                refreshLayout.setRefreshing(false);
             }
         });
     }

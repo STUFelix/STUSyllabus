@@ -7,55 +7,39 @@
     android:orientation="vertical"
     tools:context="com.example.daidaijie.syllabusapplication.mystu.CourseWareActivity">
 
-    <android.support.constraint.ConstraintLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="@dimen/toolbar_height"
+        android:background="?attr/colorPrimary"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.PopupOverlay"
+        app:titleTextColor="@android:color/white">
 
-        <RelativeLayout
-            android:id="@+id/courseware_relativeLayout"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:background="@color/colorPrimaryDark"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="12dp"
+            android:paddingLeft="68dp"
+            android:singleLine="true"
+            android:text="课件详情"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"/>
+    </android.support.v7.widget.Toolbar>
 
-            <TextView
-                android:id="@+id/courseware_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:text="课件详情"
-                android:textColor="#ffffff"
-                android:textSize="25sp" />
+    <android.support.v4.widget.SwipeRefreshLayout
+    android:id="@+id/refreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ListView
+        android:id="@+id/courseware_list_View"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
-            <ImageButton
-                android:id="@+id/courseware_bt_back"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="14dp"
-                android:layout_marginLeft="14dp"
-                android:background="@color/colorPrimaryDark"
-                android:scaleType="fitXY"
-                android:src="@drawable/mystu_courseware_back_key" />
-        </RelativeLayout>
-
-        <ListView
-
-            android:id="@+id/courseware_list_View"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/courseware_relativeLayout">
-
-        </ListView>
-    </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>

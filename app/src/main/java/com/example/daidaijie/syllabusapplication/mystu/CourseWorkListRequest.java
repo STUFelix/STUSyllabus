@@ -4,6 +4,7 @@ package com.example.daidaijie.syllabusapplication.mystu;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -24,16 +25,18 @@ public class CourseWorkListRequest {
     private String course_linkid;
     private Handler courseworklistHandler;
     private Context context;
+    private SwipeRefreshLayout refreshLayout;
 
     CourseWorkListRequest() {
 
     }
 
-    CourseWorkListRequest(String Cookie, String course_linkid, Handler worklistHandler,Context context) {
+    CourseWorkListRequest(String Cookie, String course_linkid, Handler worklistHandler,Context context,SwipeRefreshLayout refreshLayout) {
         this.Cookie = Cookie;
         this.course_linkid = course_linkid;
         this.courseworklistHandler = worklistHandler;
-        this.context =context;
+        this.context = context;
+        this.refreshLayout =refreshLayout;
     }
 
     public void getWorkList() {
@@ -90,6 +93,7 @@ public class CourseWorkListRequest {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable throwable) {
                 Toast.makeText(context,"作业列表数据请求失败",Toast.LENGTH_SHORT).show();
+                refreshLayout.setRefreshing(false);
             }
         });
 

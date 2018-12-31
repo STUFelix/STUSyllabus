@@ -18,22 +18,28 @@ public class CourseWareDataWork {
     private List<CourseWareFolderData> folderDataList;
     private List<Map<String, Object>> dataList = new ArrayList<>();
 
+    private static int wareNum;
+    public static int getWareNum() {
+        return wareNum;
+    }
+
+
     public void setData(String jsonData) {
         Gson gson = new Gson();
         CourseWarePerson person = gson.fromJson(jsonData, CourseWarePerson.class);
         fileDataList = person.getFiles();
         folderDataList = person.getFolders();
-//        Log.d("fileData-------",fileDataList.toString());
-//        Log.d("fileData-------",folderDataList.toString());
     }
 
     public List<Map<String, Object>> getData() {
         try {
             JSONArray fileArray = new JSONArray(fileDataList.toString());
-            for (int i = 0; i < fileArray.length(); i++) {
+            wareNum = fileArray.length();
+
+            for (int i = 0; i < wareNum; i++) {
                 Map<String, Object> map = new HashMap<>();
                 JSONObject jsonObject = fileArray.getJSONObject(i);
-                if (null != jsonObject) {
+                if (jsonObject != null) {
                     String fileName = jsonObject.optString("fileName");
                     //String fileId = jsonObject.optString("fileId");
                     String fileLink = jsonObject.optString("fileLink");
@@ -65,14 +71,14 @@ public class CourseWareDataWork {
                             map.put("fileImg", R.drawable.mystu_courseware_allx);
                     }
                     dataList.add(map);
-
                 }
             }
+
             JSONArray folderArray = new JSONArray(folderDataList.toString());
             for (int j = 0; j < folderArray.length(); j++) {
                 JSONObject jsonObject2 = folderArray.getJSONObject(j);
                 Map<String, Object> map = new HashMap<>();
-                if (null != jsonObject2) {
+                if (jsonObject2 != null) {
                     String folderName = jsonObject2.optString("folderName");
                     String folderLinkId = jsonObject2.optString("folderLinkId");
                     String folderLink = jsonObject2.optString("folderLink");

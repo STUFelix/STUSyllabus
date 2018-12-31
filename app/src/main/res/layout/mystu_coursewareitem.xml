@@ -25,7 +25,7 @@
             android:textSize="16sp"
             android:layout_width="318dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="6dp"
             app:layout_constraintLeft_toRightOf="@+id/courseware_ig_kind"

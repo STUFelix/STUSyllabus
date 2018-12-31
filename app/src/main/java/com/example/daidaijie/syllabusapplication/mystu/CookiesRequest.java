@@ -4,6 +4,7 @@ package com.example.daidaijie.syllabusapplication.mystu;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -24,16 +25,18 @@ public  class  CookiesRequest {
     private String cookiesUserName;
     private String cookiesPassword;
     private Handler cookiesHandler;
+    private SwipeRefreshLayout refreshLayout;
 
     CookiesRequest(){
 
     }
 
-    CookiesRequest(String cookiesUserName, String cookiesPassword, Handler cookiesHandler,Context context) {
+    CookiesRequest(String cookiesUserName, String cookiesPassword, Handler cookiesHandler,Context context,SwipeRefreshLayout refreshLayout) {
         this.cookiesUserName = cookiesUserName;
         this.cookiesPassword = cookiesPassword;
         this.cookiesHandler = cookiesHandler;
         this.context = context;
+        this.refreshLayout = refreshLayout;
     }
 
     public void getCookies() {
@@ -96,7 +99,8 @@ public  class  CookiesRequest {
             //请求失败时回调
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable throwable) {
-                Toast.makeText(context,"Cookies请求失败——请检查网络",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Cookies请求失败！\n请检查网络后重新刷新",Toast.LENGTH_SHORT).show();
+                refreshLayout.setRefreshing(false);
             }
         });
     }

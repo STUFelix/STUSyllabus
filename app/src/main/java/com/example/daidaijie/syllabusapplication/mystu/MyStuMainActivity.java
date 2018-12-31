@@ -10,6 +10,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.daidaijie.syllabusapplication.App;
 import com.example.daidaijie.syllabusapplication.R;
@@ -89,11 +90,6 @@ public class MyStuMainActivity extends BaseActivity {
 
                     toRequestAdapter();//将数据关联到adapter，并在其中嵌套活动的跳转
                 }
-                /**
-                else{
-                  还是没有解决若本学期无课程，课程无数据，如何提醒用户的问题。
-                    forHint();//无用，哪怕这学期无课程，这个方法也没有被调用，可能说明都没进行sendMessage();
-                }*/
             }
         }
     };
@@ -107,26 +103,27 @@ public class MyStuMainActivity extends BaseActivity {
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         listView = (ListView) findViewById(R.id.mystu_course_listview);
-        refreshLayout = (SwipeRefreshLayout)findViewById(R.id.refreshLayout);
 
-        /**
-         * 有一个问题 如何在没网络的情况，导致网络请求失败后，然后手动操作连上了网，如何实现自动的再次网络请求，而无需手动退出，再进一次界面进行网络请求
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {//设置刷新监听器
-         @Override
-         public void onRefresh() {
-         refreshLayout.setRefreshing(true);
-        CookiesRequest mCookiesRequest = new CookiesRequest(cookiesUserName,cookiesPassword,cookiesHandler,MyStuMainActivity.this);
-        mCookiesRequest.getCookies();
-    }
-});
-         */
+        refreshLayout = (SwipeRefreshLayout)findViewById(R.id.refreshLayout);
+        refreshLayout.setColorSchemeResources(
+                android.R.color.holo_blue_light,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light
+        );
         setupTitleBar(mToolbar);
 
         getUserInfo();//获取用户账号、密码、学年与学期
         toGetCookie();//获取Cookie 然后自动请求课程列表
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                toGetCookie();
+            }
+        });
     }
 
     protected int getContentView(){
@@ -153,8 +150,9 @@ public class MyStuMainActivity extends BaseActivity {
         refreshLayout.setEnabled(true);
         refreshLayout.setRefreshing(true);
         /*需要通过handler拿到用户Cookie*/
-        CookiesRequest mCookiesRequest = new CookiesRequest(cookiesUserName,cookiesPassword,cookiesHandler,MyStuMainActivity.this);
+        CookiesRequest mCookiesRequest = new CookiesRequest(cookiesUserName,cookiesPassword,cookiesHandler,MyStuMainActivity.this,refreshLayout);
         mCookiesRequest.getCookies();
+        Toast.makeText(this,"mystu君~正在努力加载中~",Toast.LENGTH_SHORT).show();
     }
 
     /**调用此函数
@@ -178,15 +176,13 @@ public class MyStuMainActivity extends BaseActivity {
                 Plist.add(map);
             }
 
-            if(PcourseNum == 0){
+            if(PcourseNum != 0){
+                refreshLayout.setRefreshing(false);
+                refreshLayout.setEnabled(false);
+            }else {
+                refreshLayout.setRefreshing(false);
                 forHint();
             }
-
-            refreshLayout.setRefreshing(false);
-            refreshLayout.setEnabled(false);
-
-            /**如果本学期没有mystu，进行toast显示提示用户
-             * **/
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -238,13 +234,13 @@ public class MyStuMainActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
+                        MyStuMainActivity.this.finish();
                     }
                 });
         normalDialog.create().show();
     }
+
 }
-
-
 
 /**
  * 这个activity显示前，进行了两次请求 一次为cookie 一次为CourseList；

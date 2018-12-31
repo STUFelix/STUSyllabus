@@ -77,7 +77,19 @@ public class CourseWorkMainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setupTitleBar(mToolbar);
         refreshLayout = (SwipeRefreshLayout)findViewById(R.id.refreshLayout);
+        refreshLayout.setColorSchemeResources(
+                android.R.color.holo_blue_light,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light
+        );
         getParameter_andUse();//进行CourseWorkList数据网络请求
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getParameter_andUse();
+            }
+        });
     }
     protected int getContentView(){
         return R.layout.mystu_coursework;
@@ -95,7 +107,7 @@ public class CourseWorkMainActivity extends BaseActivity {
         /**
          *worklist数据请求
          **/
-        CourseWorkListRequest courseWorkListRequest = new CourseWorkListRequest(Cookie, course_linkid, worklistHandler,CourseWorkMainActivity.this);
+        CourseWorkListRequest courseWorkListRequest = new CourseWorkListRequest(Cookie, course_linkid, worklistHandler,CourseWorkMainActivity.this,refreshLayout);
         courseWorkListRequest.getWorkList();
     }
 
@@ -124,6 +136,7 @@ public class CourseWorkMainActivity extends BaseActivity {
                     courseWorkDetailsRequest.getWorkList();
                     myPosition= position;
 
+                    refreshLayout.setRefreshing(true);
                     avoidMultiplyRequestBug = false;
                     }
                     /**点击对应的item，会进行相应的数据请求 根据position （所以这里的position值必须被传递）
@@ -137,6 +150,8 @@ public class CourseWorkMainActivity extends BaseActivity {
     }
 
     private  void workDetailsDialog(int position ){
+
+        refreshLayout.setRefreshing(false);
         avoidMultiplyRequestBug = true;
         AlertDialog.Builder normalDialog
                 = new AlertDialog.Builder(this)
@@ -153,7 +168,6 @@ public class CourseWorkMainActivity extends BaseActivity {
 
     private  void forHint(){
         refreshLayout.setRefreshing(false);
-        refreshLayout.setEnabled(false);
 
         AlertDialog.Builder normalDialog
                 = new AlertDialog.Builder(this)
@@ -163,6 +177,7 @@ public class CourseWorkMainActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
+                        CourseWorkMainActivity.this.finish();
                     }
                 });
         normalDialog.create().show();

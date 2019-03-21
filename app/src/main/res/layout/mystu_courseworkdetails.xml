@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="?attr/colorPrimary"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.PopupOverlay"
+        app:titleTextColor="@android:color/white">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="12dp"
+            android:paddingLeft="68dp"
+            android:singleLine="true"
+            android:text="作业详情"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"/>
+    </android.support.v7.widget.Toolbar>
+
+
+
+    <TextView
+        android:id="@+id/courseworkdetails_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="程序题2 作业(2.2)"/>
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:id="@+id/courseworkdetails_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="13sp"
+        android:textStyle="italic"
+        android:textColor="#696969"
+        android:text="开始时间： 2017年11月16日 星期四 19:10"
+        />
+    <TextView
+        android:id="@+id/courseworkdetails_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        android:textColor="#696969"
+        android:text="结束时间： 2017年11月21日 星期二 19:10"
+        />
+    <TextView
+        android:id="@+id/courseworkdetails_submitstate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textStyle="italic"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:textColor="#8B8989"
+        android:text="提交状态： 此作业无需在网上提交任何内容"/>
+    <TextView
+        android:id="@+id/courseworkdetails_gradingstate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_gravity="center"
+        android:textStyle="italic"
+        android:layout_marginTop="5dp"
+        android:textColor="#8B8989"
+        android:text="评分状态： 无" />
+
+    <TextView
+        android:id="@+id/courseworkdetails_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:scrollbars="vertical"
+        android:text="作业内容: 很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据"
+        />
+
+
+
+</LinearLayout>

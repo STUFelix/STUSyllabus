@@ -23,7 +23,7 @@
             android:paddingTop="12dp"
             android:paddingLeft="68dp"
             android:singleLine="true"
-            android:text="课件详情"
+            android:text="课件列表"
             android:textColor="@android:color/white"
             android:textSize="20sp"/>
     </android.support.v7.widget.Toolbar>

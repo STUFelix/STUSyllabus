@@ -140,6 +140,8 @@
                 app:cardTitle="MY STU">
             </com.example.daidaijie.syllabusapplication.widget.ItemCardLayout>
 
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -169,11 +171,50 @@
             </com.example.daidaijie.syllabusapplication.widget.ItemCardLayout>
 
             <com.example.daidaijie.syllabusapplication.widget.ItemCardLayout
+                android:id="@+id/toMealCardItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_weight="1"
-                app:cardIcon="@drawable/ic_question"
+                app:cardIcon="@drawable/ic_mealcard"
+                app:cardTitle="饭卡">
+            </com.example.daidaijie.syllabusapplication.widget.ItemCardLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <com.example.daidaijie.syllabusapplication.widget.ItemCardLayout
+                android:id="@+id/toComingSoonItem1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                app:cardIcon="@drawable/ic_newquestion"
+                app:cardTitle="敬请期待">
+            </com.example.daidaijie.syllabusapplication.widget.ItemCardLayout>
+
+            <com.example.daidaijie.syllabusapplication.widget.ItemCardLayout
+                android:id="@+id/toToDoItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:cardIcon="@drawable/ic_todo"
+                app:cardTitle="TODO">
+            </com.example.daidaijie.syllabusapplication.widget.ItemCardLayout>
+
+            <com.example.daidaijie.syllabusapplication.widget.ItemCardLayout
+                android:id="@+id/toComingSoonItem2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="1"
+                app:cardIcon="@drawable/ic_newquestion"
                 app:cardTitle="敬请期待">
             </com.example.daidaijie.syllabusapplication.widget.ItemCardLayout>
 

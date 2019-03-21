@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical">
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/colorPrimary"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleTextColor="#FFF">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/titleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="添加事项"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+
+
+        <EditText
+            android:id="@+id/taskTitle"
+            android:theme="@style/todo_MyEditText"
+            android:hint="事项标题（必填）"
+            android:singleLine="true"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/contentEditText"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="@color/material_white"
+            android:gravity="top|left"
+            android:hint="事项描述..."
+            android:theme="@style/todo_MyEditText"
+            android:maxLength="140"
+            android:maxLines="10"
+            android:padding="8dp"
+            android:textColor="#424242"
+            android:textColorHint="#999999"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/userToDoReminderIconImageButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:padding="10dp"
+            android:src="@drawable/todo_alarm" />
+
+        <TextView
+            android:id="@+id/userToDoRemindMeTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="开启提醒"
+            android:paddingBottom="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="8dp"
+            android:textColor="#666"
+            android:textSize="16sp" />
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/toDoHasDateSwitchCompat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:theme="@style/todo_scstyle"
+            android:padding="8dp" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/selectTime"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/sureAddTask"
+            android:text="确定"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="22dp"
+            android:background="@drawable/todo_button_sure"
+            android:layout_width="100dp"
+            android:layout_marginRight="30dp"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/cancelAddTask"
+            android:text="取消"
+            android:textSize="22dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/todo_button_cancel"
+            android:layout_width="100dp"
+            android:layout_marginLeft="30dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

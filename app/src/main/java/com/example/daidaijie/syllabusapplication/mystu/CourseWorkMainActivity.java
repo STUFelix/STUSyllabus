@@ -1,25 +1,21 @@
 package com.example.daidaijie.syllabusapplication.mystu;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
-
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
-
-
+import android.widget.Toast;
 import com.example.daidaijie.syllabusapplication.App;
 import com.example.daidaijie.syllabusapplication.R;
 import com.example.daidaijie.syllabusapplication.base.BaseActivity;
-
+import com.example.daidaijie.syllabusapplication.mystu.request.CourseWorkDetailsRequest;
+import com.example.daidaijie.syllabusapplication.mystu.request.CourseWorkListRequest;
 import butterknife.BindView;
 
 
@@ -29,13 +25,12 @@ public class CourseWorkMainActivity extends BaseActivity {
     TextView mTitleTextView;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-
-    private boolean avoidMultiplyRequestBug = true;
-
-    private SwipeRefreshLayout refreshLayout;
-
-    private RecyclerView mRvTestList;
+    @BindView(R.id.refreshLayout)
+    SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.course_rv_testlist)
+    RecyclerView mRvTestList;
     private String Cookie;
+    private boolean avoidMultiplyRequestBug = true;
 
     private Handler worklistHandler = new Handler() {
         @Override
@@ -48,7 +43,7 @@ public class CourseWorkMainActivity extends BaseActivity {
                 if(CourseWorkUtil.getWorklistNum() != 0){
                     toRequestAdapter();//将数据关联到adapter 并设置点击事件 并进行CourseWorkDetails网络请求
                     refreshLayout.setRefreshing(false);
-                    refreshLayout.setEnabled(false);
+                    avoidMultiplyRequestBug = true;
                 }else {
                     forHint();
                 }
@@ -76,7 +71,6 @@ public class CourseWorkMainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupTitleBar(mToolbar);
-        refreshLayout = (SwipeRefreshLayout)findViewById(R.id.refreshLayout);
         refreshLayout.setColorSchemeResources(
                 android.R.color.holo_blue_light,
                 android.R.color.holo_green_light,
@@ -132,7 +126,7 @@ public class CourseWorkMainActivity extends BaseActivity {
             public void onItemClick(View view, int position) {
                 try {
                     if(avoidMultiplyRequestBug){
-                    CourseWorkDetailsRequest courseWorkDetailsRequest = new CourseWorkDetailsRequest(Cookie, CourseWorkUtil.getAssignLinkId(position), workdetailsHandler,CourseWorkMainActivity.this);
+                    CourseWorkDetailsRequest courseWorkDetailsRequest = new CourseWorkDetailsRequest(Cookie, CourseWorkUtil.getAssignLinkId(position), workdetailsHandler,CourseWorkMainActivity.this,refreshLayout);
                     courseWorkDetailsRequest.getWorkList();
                     myPosition= position;
 
@@ -150,37 +144,25 @@ public class CourseWorkMainActivity extends BaseActivity {
     }
 
     private  void workDetailsDialog(int position ){
-
         refreshLayout.setRefreshing(false);
         avoidMultiplyRequestBug = true;
-        AlertDialog.Builder normalDialog
-                = new AlertDialog.Builder(this)
-                .setTitle(CourseWorkUtil.getName(position)+"   -作业详情")
-                .setMessage(CourseWorkUtil.getDialogMessage())
-                .setPositiveButton("了解", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-        normalDialog.create().show();
+        Intent intent =new Intent(this,CourseWorkDetailsActivity.class);
+        intent.putExtra("position",position);
+        startActivity(intent);
+
     }
 
     private  void forHint(){
         refreshLayout.setRefreshing(false);
+        Toast.makeText(this,"本学期暂无作业",Toast.LENGTH_LONG).show();
+    }
 
-        AlertDialog.Builder normalDialog
-                = new AlertDialog.Builder(this)
-                .setTitle("  -温馨提示")
-                .setMessage("\n\n本学期暂无作业\n")
-                .setPositiveButton("好吧~", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                        CourseWorkMainActivity.this.finish();
-                    }
-                });
-        normalDialog.create().show();
+    /**防止handle内存泄漏*/
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        worklistHandler.removeCallbacksAndMessages(null);
+        workdetailsHandler.removeCallbacksAndMessages(null);
     }
 
     /**

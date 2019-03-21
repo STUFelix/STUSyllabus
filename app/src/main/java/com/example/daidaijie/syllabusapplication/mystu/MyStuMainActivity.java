@@ -1,7 +1,5 @@
 package com.example.daidaijie.syllabusapplication.mystu;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,17 +9,16 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.daidaijie.syllabusapplication.App;
 import com.example.daidaijie.syllabusapplication.R;
 import com.example.daidaijie.syllabusapplication.base.BaseActivity;
 import com.example.daidaijie.syllabusapplication.bean.Semester;
 import com.example.daidaijie.syllabusapplication.bean.UserLogin;
-
+import com.example.daidaijie.syllabusapplication.mystu.request.CookiesRequest;
+import com.example.daidaijie.syllabusapplication.mystu.request.CourseListRequest;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,37 +40,37 @@ public class MyStuMainActivity extends BaseActivity {
     TextView mTitleTextView;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    private SwipeRefreshLayout refreshLayout;
-
+    @BindView(R.id.mystu_course_listview)
+    ListView listView;
+    @BindView(R.id.refreshLayout)
+    SwipeRefreshLayout refreshLayout;
 
     private String cookies ="";
     private String year = "";
     private int season = 1;
     private String cookiesUserName = "";
     private String cookiesPassword ="";
-
-    private ListView listView;
     private CourseListAdapter mc_adapter;
-
-
     private int PcourseNum = -1;
 
     //接受异步信息Cookie
-    private Handler cookiesHandler = new Handler() {
+    private Handler mystumainactivity_cookiesHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if(msg.what == 10001){
                 cookies=msg.obj.toString();
 
-                /**通过这个方法把handleMessage的数据传递到外部
-                 * 并在整个app中可以通过
-                 * */
+                 //通过这个方法把handleMessage的数据传递到外部并在整个app中可以通过
                 App app =(App)getApplication();
                 app.setTCookie(cookies);
 
-                //对课程列表进行请求，即第一个activity界面的数据请求
-                CourseListRequest mCourseListRequest=new CourseListRequest(cookies,year,season,mcourseListHandler,MyStuMainActivity.this);
-                mCourseListRequest.getCourseList();
+                if ("".equals(cookies)||cookies==null){
+                    CookiesRequest mCookiesRequest = new CookiesRequest(mystumainactivity_cookiesHandler,cookiesUserName,cookiesPassword,MyStuMainActivity.this,refreshLayout);
+                    mCookiesRequest.getCookies();
+                }else {
+                    CourseListRequest mCourseListRequest=new CourseListRequest(cookies,year,season,mcourseListHandler,MyStuMainActivity.this,refreshLayout);
+                    mCourseListRequest.getCourseList();
+                }
             }
         }
     };
@@ -104,9 +101,18 @@ public class MyStuMainActivity extends BaseActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listView = (ListView) findViewById(R.id.mystu_course_listview);
+        getUserInfo();//获取用户账号、密码、学年与学期
+        mInit();
+        toRequest();
+    }
 
-        refreshLayout = (SwipeRefreshLayout)findViewById(R.id.refreshLayout);
+    protected int getContentView(){
+        return R.layout.mystu_courselist;
+    }
+
+    private void mInit() {
+        refreshLayout.setEnabled(true);
+        refreshLayout.setRefreshing(true);
         refreshLayout.setColorSchemeResources(
                 android.R.color.holo_blue_light,
                 android.R.color.holo_green_light,
@@ -114,20 +120,32 @@ public class MyStuMainActivity extends BaseActivity {
                 android.R.color.holo_red_light
         );
         setupTitleBar(mToolbar);
+        App app = (App) getApplication();
+        cookies = app.getTCookie();
+    }
 
-        getUserInfo();//获取用户账号、密码、学年与学期
-        toGetCookie();//获取Cookie 然后自动请求课程列表
+    private void  toRequest(){
+        if ("".equals(cookies)||cookies==null){
+            CookiesRequest mCookiesRequest = new CookiesRequest(mystumainactivity_cookiesHandler,cookiesUserName,cookiesPassword,MyStuMainActivity.this,refreshLayout);
+            mCookiesRequest.getCookies();
+        }else {
+            CourseListRequest mCourseListRequest=new CourseListRequest(cookies,year,season,mcourseListHandler,MyStuMainActivity.this,refreshLayout);
+            mCourseListRequest.getCourseList();
+        }
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                toGetCookie();
+
+                if ("".equals(cookies)||cookies==null){
+                    CookiesRequest mCookiesRequest = new CookiesRequest(mystumainactivity_cookiesHandler,cookiesUserName,cookiesPassword,MyStuMainActivity.this,refreshLayout);
+                    mCookiesRequest.getCookies();
+                }else {
+                    CourseListRequest mCourseListRequest=new CourseListRequest(cookies,year,season,mcourseListHandler,MyStuMainActivity.this,refreshLayout);
+                    mCourseListRequest.getCourseList();
+                }
             }
         });
-    }
-
-    protected int getContentView(){
-        return R.layout.mystu_courselist;
     }
 
 /** 获取用户账号、密码、学年与学期
@@ -144,15 +162,6 @@ public class MyStuMainActivity extends BaseActivity {
                 season = semester.getSeason();
             }
         }
-    }
-
-    public void toGetCookie(){
-        refreshLayout.setEnabled(true);
-        refreshLayout.setRefreshing(true);
-        /*需要通过handler拿到用户Cookie*/
-        CookiesRequest mCookiesRequest = new CookiesRequest(cookiesUserName,cookiesPassword,cookiesHandler,MyStuMainActivity.this,refreshLayout);
-        mCookiesRequest.getCookies();
-        Toast.makeText(this,"mystu君~正在努力加载中~",Toast.LENGTH_SHORT).show();
     }
 
     /**调用此函数
@@ -226,23 +235,15 @@ public class MyStuMainActivity extends BaseActivity {
         });
     }
     private  void forHint(){
-        AlertDialog.Builder normalDialog
-                = new AlertDialog.Builder(this)
-                .setTitle("  -温馨提示")
-                .setMessage("\n\n本学期暂无课程\n")
-                .setPositiveButton("好吧~", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                        MyStuMainActivity.this.finish();
-                    }
-                });
-        normalDialog.create().show();
+        Toast.makeText(this,"本学期暂无课程",Toast.LENGTH_LONG).show();
+    }
+
+    /**防止handle内存泄漏*/
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mystumainactivity_cookiesHandler.removeCallbacksAndMessages(null);
+        mcourseListHandler.removeCallbacksAndMessages(null);
     }
 
 }
-
-/**
- * 这个activity显示前，进行了两次请求 一次为cookie 一次为CourseList；
- * 若想优化activity启动速度 可以把cookie的请求塞到进入课表的第一个主界面去
- * */

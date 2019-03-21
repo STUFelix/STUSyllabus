@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
@@ -27,11 +29,13 @@ import com.balysv.materialripple.MaterialRippleLayout;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
+import com.example.daidaijie.syllabusapplication.App;
 import com.example.daidaijie.syllabusapplication.Constants;
 import com.example.daidaijie.syllabusapplication.R;
 import com.example.daidaijie.syllabusapplication.activity.EmailWebActivity;
 import com.example.daidaijie.syllabusapplication.activity.LibraryWebActivity;
 import com.example.daidaijie.syllabusapplication.activity.LoginInternetActivity;
+import com.example.daidaijie.syllabusapplication.bean.UserLogin;
 import com.example.daidaijie.syllabusapplication.dialog.ThemePickerFragment;
 import com.example.daidaijie.syllabusapplication.base.BaseActivity;
 import com.example.daidaijie.syllabusapplication.bean.Banner;
@@ -43,7 +47,9 @@ import com.example.daidaijie.syllabusapplication.event.UpdateUserInfoEvent;
 import com.example.daidaijie.syllabusapplication.exam.mainMenu.ExamActivity;
 import com.example.daidaijie.syllabusapplication.grade.GradeActivity;
 import com.example.daidaijie.syllabusapplication.login.login.LoginActivity;
+import com.example.daidaijie.syllabusapplication.mealcard.MealCardActivity;
 import com.example.daidaijie.syllabusapplication.model.InternetModel;
+import com.example.daidaijie.syllabusapplication.mystu.request.CookiesRequest;
 import com.example.daidaijie.syllabusapplication.mystu.MyStuMainActivity;
 import com.example.daidaijie.syllabusapplication.other.update.IDownloadView;
 import com.example.daidaijie.syllabusapplication.other.update.UpdateInstaller;
@@ -51,6 +57,7 @@ import com.example.daidaijie.syllabusapplication.retrofitApi.SchoolInternetApi;
 import com.example.daidaijie.syllabusapplication.services.StreamService;
 import com.example.daidaijie.syllabusapplication.stream.IStreamModel;
 import com.example.daidaijie.syllabusapplication.stream.StreamModel;
+import com.example.daidaijie.syllabusapplication.todo.Activity.ToDoMainActivity;
 import com.example.daidaijie.syllabusapplication.util.LoggerUtil;
 import com.example.daidaijie.syllabusapplication.util.ShareWXUtil;
 import com.example.daidaijie.syllabusapplication.util.ThemeUtil;
@@ -91,6 +98,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import cn.bmob.v3.Bmob;
+import io.realm.Realm;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
@@ -130,8 +138,14 @@ public class MainActivity extends BaseActivity implements
     ItemCardLayout mToWifiItemLayout;
     @BindView(R.id.toLibraryCardItem)
     ItemCardLayout mToLibraryCardItem;
+
+    /**2019.3.18 by:Felix*/
     @BindView(R.id.toMyStuCardItem)
     ItemCardLayout mToMyStuCardItem;
+    @BindView(R.id.toMealCardItem)
+    ItemCardLayout mToMealCardItem;
+    @BindView(R.id.toToDoItem)
+    ItemCardLayout mTODOItem;
 
     RelativeLayout navHeadRelativeLayout;
     SimpleDraweeView headImageDraweeView;
@@ -152,6 +166,19 @@ public class MainActivity extends BaseActivity implements
     // 用于显示下载进度
     private ProgressDialog progressDialog;
     private UpdateAsync updateAsync;
+
+    /**用于mystu的Cookie请求,并新添方法与onDestroy中防止内存泄漏*/
+    private  Handler cookiesHandler=new Handler(){
+        @Override
+        public void handleMessage(Message message){
+            if (message.what == 10002){
+                String cookies=message.obj.toString();
+                //通过这个方法把handleMessage的数据传递到外部并在整个app中可以通过
+                App app =(App)getApplication();
+                app.setTCookie(cookies);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -217,6 +244,8 @@ public class MainActivity extends BaseActivity implements
         } else {
             stopStreamListen();
         }
+
+        forMyStuActivity();
     }
 
     @Override
@@ -522,7 +551,6 @@ public class MainActivity extends BaseActivity implements
         mToMyStuCardItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(CourseWorkMainActivity.this, TakeOutActivity.class);
                 Intent intent = new Intent(MainActivity.this, MyStuMainActivity.class);
                 startActivity(intent);
             }
@@ -533,6 +561,20 @@ public class MainActivity extends BaseActivity implements
                 Intent intent = new Intent(MainActivity.this, EmailWebActivity.class);
                 startActivity(intent);
             }
+        });
+        mToMealCardItem.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(MainActivity.this, MealCardActivity.class);
+                startActivity(intent);
+            }
+        });
+        mTODOItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(MainActivity.this,ToDoMainActivity.class);
+                startActivity(intent);
+                }
         });
     }
 
@@ -575,11 +617,13 @@ public class MainActivity extends BaseActivity implements
         mMainPresenter.showUserInfo();
     }
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
         stopStreamListen();
+        cookiesHandler.removeCallbacksAndMessages(null);
     }
 
     private void startStreamListen() {
@@ -617,5 +661,14 @@ public class MainActivity extends BaseActivity implements
             Intent intent = StreamService.getIntent(MainActivity.this);
             stopService(intent);
         }
+    }
+
+    private void forMyStuActivity(){
+        Realm xRealm = Realm.getDefaultInstance();
+        UserLogin cookiesUserLogin = xRealm.where(UserLogin.class).findFirst();
+        String cookiesUserName = cookiesUserLogin.getUsername();
+        String cookiesPassword = cookiesUserLogin.getPassword();
+        CookiesRequest mCookiesRequest = new CookiesRequest(cookiesUserName,cookiesPassword,cookiesHandler);
+        mCookiesRequest.getCookies();
     }
 }

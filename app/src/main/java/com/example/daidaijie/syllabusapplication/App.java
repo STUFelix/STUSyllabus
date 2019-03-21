@@ -128,8 +128,9 @@ public class App extends Application {
         return mAppComponent;
     }
 
+
     /**在mystu模块中
-     * 通过这两个方法使用cookie
+     * 通过这两个方法使用cookie,解决cookie请求固有时长过长问题
      * */
     public String getTCookie(){
         return TCookie;

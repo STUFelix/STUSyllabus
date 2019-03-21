@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -60,14 +61,13 @@ public class CourseListAdapter extends BaseAdapter
     {
         if (convertView == null)
         {
-            convertView = LayoutInflater.from(context)
-                    .inflate(R.layout.mystu_courselistsingle, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.mystu_courselistsingle, null);
 
             holder = new ViewHolder();
             holder.course_name = (TextView) convertView.findViewById(R.id.course_name_textView);
             holder.course_resources = (Button) convertView.findViewById(R.id.course_resources_button);
             holder.homework = (Button) convertView.findViewById(R.id.course_homework_button);
-
+            holder.imageView =(ImageView)convertView.findViewById(R.id.imageView);
             convertView.setTag(holder);
         }
         else
@@ -76,13 +76,10 @@ public class CourseListAdapter extends BaseAdapter
         }
         //实例化
 
-
         holder.course_name.setText(list.get(position).get("course_name"));
-
-
+        //通过setTag方法来判断对应的功能
         holder.course_resources.setTag("course_resources");
         holder.homework.setTag("course_work");
-        //通过setTag方法来判断对应的功能
 
         holder.course_resources.setOnClickListener(new View.OnClickListener()
         {
@@ -91,9 +88,6 @@ public class CourseListAdapter extends BaseAdapter
             {
                 clickListener.onclick((String) holder.course_resources.getTag(),position
                         ,list.get(position).get("courseLink"),list.get(position).get("courseLinkId"));
-
-
-
             }
         });//为下载课件按钮利用接口回调设置监听事件
 
@@ -104,8 +98,6 @@ public class CourseListAdapter extends BaseAdapter
             {
                 clickListener.onclick((String) holder.homework.getTag(),position
                         ,list.get(position).get("courseLink"),list.get(position).get("courseLinkId"));
-
-
             }
         });//为查看作业按钮利用接口回调设置监听事件
 
@@ -119,6 +111,7 @@ public class CourseListAdapter extends BaseAdapter
     {
         TextView course_name;
         Button course_resources,homework;
+        ImageView imageView;
     }
 
 }

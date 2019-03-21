@@ -1,8 +1,9 @@
-package com.example.daidaijie.syllabusapplication.mystu;
+package com.example.daidaijie.syllabusapplication.mystu.request;
 
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -17,34 +18,37 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class CourseListRequest {
+public class DiscussionRequest {
 
     private Context context;
-    private Handler mcourseListHandler;
+    private Handler mcourseIndexHandler;
     public  String cookies;
-    public  String years;
-    public  int semester;
+    private int pageSize;
+    private int pageNo;
 
 
-    CourseListRequest(){
+
+    public DiscussionRequest(){
 
     }
 
-    CourseListRequest(String tCookies, String tYears, int tSemester, Handler thandler,Context context){
-    this.cookies = tCookies;
-    this.years = tYears;
-    this.semester=tSemester;
-    this.mcourseListHandler=thandler;
-    this.context =context;
+    public DiscussionRequest(String cookies,int pageSize,int pageNo, Handler handler,Context context){
+        this.cookies = cookies;
+        this.pageSize = pageSize;
+        this.pageNo = pageNo;
+        this.mcourseIndexHandler=handler;
+        this.context =context;
     }
 
-    public  void getCourseList() {
+    public  void getCourseDiscussion() {
 
         //步骤4:创建Retrofit对象
 
         Retrofit retrofit = new Retrofit.Builder()
 
-                .baseUrl("https://class.stuapps.com") // 设置 网络请求 Url
+                //.baseUrl("https://class.stuapps.com") // 设置 网络请求 Url
+
+                .baseUrl("http://118.126.92.214:8083/")
 
                 .addConverterFactory(GsonConverterFactory.create()) //设置使用Gson解析(记得加入依赖)
 
@@ -55,7 +59,7 @@ public class CourseListRequest {
         Getdata_Interface cookiesRequest = retrofit.create(Getdata_Interface.class);
 
 
-        Call<ResponseBody> call = cookiesRequest.getCourseList(cookies,years,semester);
+        Call<ResponseBody> call = cookiesRequest.getCourseIndex(cookies,pageSize,pageNo);
 
 
         //步骤6:发送网络请求(异步)
@@ -74,11 +78,11 @@ public class CourseListRequest {
                     String str =response.body().string();
                     JSONObject jsonObject = new JSONObject(str);
 
-                    Message courseListmsg = new Message();
-                    courseListmsg.what = 20002;
-                    courseListmsg.obj = jsonObject;
-
-                    mcourseListHandler.sendMessage(courseListmsg);
+                    Message courseDiscussion = new Message();
+                    courseDiscussion.what = 70007;
+                    courseDiscussion.obj = jsonObject;
+                    Log.i("DiscussionRequest",str);
+                    mcourseIndexHandler.sendMessage(courseDiscussion);
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -90,8 +94,12 @@ public class CourseListRequest {
             //请求失败时回调
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable throwable) {
-                Toast.makeText(context,"课程列表请求失败",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"课程讨论请求失败\n请检测网络后刷新",Toast.LENGTH_SHORT).show();
             }
         });
     }
 }
+
+
+
+

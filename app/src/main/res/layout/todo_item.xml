@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="1dp">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <TextView
+            android:id="@+id/firstChar"
+            android:text="T"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:background="#999"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="270dp"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/todoItemTitle"
+                android:layout_alignParentRight="true"
+                tools:ignore="MissingPrefix"
+                android:paddingLeft="8dp"
+                android:paddingTop="5dp"
+                android:lines="2"
+                android:textColor="#555"
+                android:ellipsize="end"
+                android:textSize="22sp"
+                android:gravity="center_vertical"
+                android:text="Task title"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingBottom="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="30dp">
+                <TextView
+                    android:text="截至时间："
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/todoItemDeadlineTime"
+                    android:textColor="?attr/colorAccent"
+                    android:gravity="center_vertical"
+                    android:layout_height="match_parent"
+                    android:text="2019-03-06 12:00"
+                    android:layout_width="wrap_content" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <CheckBox
+            android:layout_gravity="center"
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>

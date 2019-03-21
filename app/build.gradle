@@ -191,4 +191,6 @@ dependencies {
     // https://github.com/bumptech/glide
     compile 'com.github.bumptech.glide:glide:3.8.0'
     compile 'jp.wasabeef:glide-transformations:2.0.2'
+
+    compile 'com.loopeer.library:cardstack:1.0.2'
 }

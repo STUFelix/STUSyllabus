@@ -177,4 +177,36 @@
         <item name="android:windowExitAnimation">@anim/slide_out_to_bottom</item>
     </style>
 
+
+    <style name="mealcard_rg_style">
+        <item name="android:layout_width">0dp</item>
+
+        <item name="android:layout_weight">1</item>
+
+        <item name="android:layout_height">match_parent</item>
+
+        <item name="android:button">@null</item>
+
+        <item name="android:gravity">center</item>
+
+        <item name="android:textSize">12sp</item>
+
+        <item name="android:background">@drawable/mealcard_radiobutton_background</item>
+
+        <item name="android:layout_marginLeft">5dp</item>
+
+        <item name="android:layout_marginRight">5dp</item>
+
+        <item name="android:textColor">@drawable/mealcard_text_colors</item>
+    </style>
+
+    <style name="todo_MyEditText" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlActivated">#3b82ed</item>
+    </style>
+
+    <style name="todo_scstyle" parent="Theme.AppCompat.Light">
+        <!--开启时的颜色-->
+        <item name="colorControlActivated">#8af</item>
+    </style>
 </resources>

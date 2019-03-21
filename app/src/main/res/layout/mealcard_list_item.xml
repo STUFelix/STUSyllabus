@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:descendantFocusability="beforeDescendants"><!-- 为突出卡片效果，需设置左右padding,上下通过listView的divider设置 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mealcard_card_background"
+        android:paddingLeft="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="15dp"
+        android:descendantFocusability="afterDescendants">
+
+        <TextView
+            android:id="@+id/mealcard_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textSize="15sp"
+            android:text="G座新食堂" />
+
+        <TextView
+            android:id="@+id/mealcard_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mealcard_item_name"
+            android:textSize="10sp"
+            android:text="2019-03-13" />
+
+        <TextView
+            android:id="@+id/mealcard_item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mealcard_item_name"
+            android:layout_toRightOf="@+id/mealcard_item_date"
+            android:paddingLeft="5dp"
+            android:textSize="10sp"
+            android:text="08:44:01" />
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/mealcard_flow"
+            android:layout_toLeftOf="@+id/mealcard_item_flow"
+            android:layout_marginRight="5dp"
+            />
+
+        <TextView
+            android:id="@+id/mealcard_item_flow"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="10dp"
+            android:textSize="20sp"
+            android:text="-120" />
+    </RelativeLayout>
+</FrameLayout>

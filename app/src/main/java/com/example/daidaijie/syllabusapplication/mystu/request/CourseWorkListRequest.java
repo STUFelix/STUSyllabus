@@ -1,4 +1,4 @@
-package com.example.daidaijie.syllabusapplication.mystu;
+package com.example.daidaijie.syllabusapplication.mystu.request;
 
 
 import android.content.Context;
@@ -27,11 +27,11 @@ public class CourseWorkListRequest {
     private Context context;
     private SwipeRefreshLayout refreshLayout;
 
-    CourseWorkListRequest() {
+    public CourseWorkListRequest() {
 
     }
 
-    CourseWorkListRequest(String Cookie, String course_linkid, Handler worklistHandler,Context context,SwipeRefreshLayout refreshLayout) {
+    public CourseWorkListRequest(String Cookie, String course_linkid, Handler worklistHandler,Context context,SwipeRefreshLayout refreshLayout) {
         this.Cookie = Cookie;
         this.course_linkid = course_linkid;
         this.courseworklistHandler = worklistHandler;
@@ -40,47 +40,30 @@ public class CourseWorkListRequest {
     }
 
     public void getWorkList() {
-        //步骤4:创建Retrofit对象
+        Getdata_Interface retrofit =new RetrofitCreate().getRetrofit();
 
-        Retrofit retrofit = new Retrofit.Builder()
-
-                .baseUrl("https://class.stuapps.com") // 设置 网络请求 Url
-
-                .addConverterFactory(GsonConverterFactory.create()) //设置使用Gson解析(记得加入依赖)
-
-                .build();
-
-
-        // 步骤5:创建 网络请求接口 的实例
-
-        Getdata_Interface cookiesRequest = retrofit.create(Getdata_Interface.class);
-
-        Call<ResponseBody> call = cookiesRequest.getCourseWorkList(Cookie, course_linkid);
-
-
-        //步骤6:发送网络请求(异步)
+        Call<ResponseBody> call = retrofit.getCourseWorkList(Cookie, course_linkid);
 
         call.enqueue(new Callback<ResponseBody>() {
-
-            //请求成功时回调
 
             @Override
 
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-                // 请求处理,输出结果
-
                 try {
+                    if (response.body()!=null) {
+                        String str = response.body().string();
+                        JSONObject jsonObject = new JSONObject(str);
 
-                    String str = response.body().string();
-                    JSONObject jsonObject = new JSONObject(str);
+                        Message worklistmsg = new Message();
+                        worklistmsg.what = 30003;
+                        worklistmsg.obj = jsonObject;
 
-                    Message worklistmsg = new Message();
-                    worklistmsg.what = 30003;
-                    worklistmsg.obj = jsonObject;
-
-                    courseworklistHandler.sendMessage(worklistmsg);
-
+                        courseworklistHandler.sendMessage(worklistmsg);
+                    }else {
+                        Toast.makeText(context,"Error：请求失败",Toast.LENGTH_SHORT).show();
+                        refreshLayout.setRefreshing(false);
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {
@@ -92,7 +75,7 @@ public class CourseWorkListRequest {
             //请求失败时回调
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable throwable) {
-                Toast.makeText(context,"作业列表数据请求失败",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"作业列表请求失败\n请检测网络后刷新",Toast.LENGTH_SHORT).show();
                 refreshLayout.setRefreshing(false);
             }
         });

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#e2e4fe"><!-- 此处需设置listView背景#e2e4fe -->
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="?attr/colorPrimary"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.PopupOverlay"
+        app:titleTextColor="@android:color/white">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="12dp"
+            android:paddingLeft="68dp"
+            android:singleLine="true"
+            android:text="饭卡信息"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"/>
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="余额："
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:shadowDx="10.0"
+            android:shadowDy="10.0"
+            android:shadowColor="#D4D4D4"
+            android:shadowRadius="3.0"
+            />
+        <TextView
+            android:id="@+id/mealcard_TV_balance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:textSize="30sp"
+            android:textColor="#ff0000"
+            android:textStyle="normal"
+            android:drawableLeft="@drawable/mealcard_wallet"
+            android:drawablePadding="30dp"
+            android:text="loading..."/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:scaleType="fitXY"
+                android:background="@drawable/mealcard_bill"
+                android:layout_marginRight="10dp"/>
+            <TextView
+                android:id="@+id/mealcard_TV_todayConsume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:text="今日消费： loading... 元"
+                android:textColor="?attr/colorPrimary" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/mealcard_TV_consumeDetails_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="italic"
+            android:text="消费详情："
+            android:drawablePadding="5dp"
+            android:drawableRight="@drawable/mealcard_time"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+
+    <RadioGroup
+        android:id="@+id/mealcard_rg"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/mealcard_rb_1"
+            android:text="近三日"
+            android:checked="true"
+            style="@style/mealcard_rg_style" />
+        <RadioButton
+            android:id="@+id/mealcard_rb_2"
+            android:text="一周内"
+            style="@style/mealcard_rg_style" />
+        <RadioButton
+            android:id="@+id/mealcard_rb_3"
+            android:text="一月内"
+            style="@style/mealcard_rg_style" />
+        <RadioButton
+            android:id="@+id/mealcard_rb_4"
+            android:text="近三月"
+            style="@style/mealcard_rg_style" />
+    </RadioGroup>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/mealcard_card_background"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/mealcard_amount"
+            android:layout_toLeftOf="@+id/mealcard_TV_countCosts"
+            android:layout_marginRight="10dp"
+            />
+
+        <TextView
+            android:id="@+id/mealcard_TV_countCosts"
+            android:text="支出总计： loading..."
+            android:textColor="?attr/colorPrimary"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="10dp"
+        android:alpha="0.3"
+        android:background="#000000"
+        />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/mealcard_swipe_refresh"
+        android:layout_marginTop="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <ListView
+        android:id="@+id/card_listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:listSelector="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null"
+        android:dividerHeight="10dp" ><!-- 一定要将divider设置为@null,dividerHeight控制卡片上下距离 -->
+    </ListView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

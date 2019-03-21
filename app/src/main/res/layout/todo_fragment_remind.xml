@@ -1,0 +1,50 @@
+<LinearLayout android:id="@+id/add_task_liner_alarm"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="5dp"
+    android:orientation="vertical"
+    android:padding="3dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:text="请选择提醒时间："
+        android:paddingLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        android:padding="3dp">
+
+        <TextView
+            android:id="@+id/dateText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:background="#ffffff"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/ic_action_add_post"
+            android:gravity="left|center"
+            android:paddingLeft="15dp"
+            android:text="yyyy-mm-dd"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/timeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:background="#ffffff"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/ic_action_add_post"
+            android:gravity="left|center"
+            android:paddingLeft="15dp"
+            android:text="hh:mm"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+</LinearLayout>

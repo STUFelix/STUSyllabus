@@ -14,15 +14,18 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="40sp"
-            android:layout_height="40sp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_gravity="center"
-            android:layout_margin="10sp"
-            app:srcCompat="@drawable/mystu_courselist_book"/>
+            android:layout_margin="10dp"
+
+            android:scaleType="fitXY"
+            android:background="@drawable/mystu_courselist_book"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -36,7 +39,12 @@
                 android:text="课程名"
                 android:textColor="#000000"
                 android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scrollHorizontally="true" />
 
         </LinearLayout>
 

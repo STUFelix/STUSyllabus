@@ -2,36 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/courseware_ig_kind"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:srcCompat="@drawable/mystu_courseware_allx"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="6dp" />
-
-        <TextView
-            android:id="@+id/courseware_tv_name"
-            android:gravity="left|center"
-            android:textSize="16sp"
-            android:layout_width="318dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="6dp"
-            app:layout_constraintLeft_toRightOf="@+id/courseware_ig_kind"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="0.437" />
-
-    </android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/courseware_ig_kind"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginRight="6dp"
+        android:background="@drawable/mystu_courseware_allx"
+        />
+    <TextView
+        android:id="@+id/courseware_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:layout_marginRight="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textSize="16sp"
+        android:gravity="fill_horizontal"
+        />
+    
 </LinearLayout>

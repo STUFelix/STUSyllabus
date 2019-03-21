@@ -1,31 +1,23 @@
 package com.example.daidaijie.syllabusapplication.mystu;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.os.Handler;
 import android.os.Message;
-
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
-
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
-
 import com.example.daidaijie.syllabusapplication.App;
 import com.example.daidaijie.syllabusapplication.R;
 import com.example.daidaijie.syllabusapplication.base.BaseActivity;
-
+import com.example.daidaijie.syllabusapplication.mystu.request.CourseWareRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -154,18 +146,13 @@ public class CourseWareActivity extends BaseActivity {
     private  void forHint(){
         refreshLayout.setRefreshing(false);
         refreshLayout.setEnabled(false);
+        Toast.makeText(this,"本学期暂无课件",Toast.LENGTH_LONG).show();
+    }
 
-        AlertDialog.Builder normalDialog
-                = new AlertDialog.Builder(this)
-                .setTitle("  -温馨提示")
-                .setMessage("\n\n本学期暂无课件\n")
-                .setPositiveButton("好吧~", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                        CourseWareActivity.this.finish();
-                    }
-                });
-        normalDialog.create().show();
+    /**防止handle内存泄漏*/
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        coursewareHandler.removeCallbacksAndMessages(null);
     }
 }

@@ -1,5 +1,7 @@
 package com.example.daidaijie.syllabusapplication.mystu;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -142,7 +144,8 @@ public class CourseWorkUtil {
 
     public static String getContent(int position) {
 
-        String str ="~轻触获得作业详情！~";
+        //String str ="~轻触获得作业详情！~";
+        String str ="";
         return str;
     }
 
@@ -165,13 +168,17 @@ public class CourseWorkUtil {
 
         String str="";
 
-        str ="提交状态  ："+detailsMap.get("submitStatus")+"\n\n"+
-                "开始时间  ："+detailsMap.get("beginTime")+"\n\n"+
-                "结束时间  ："+detailsMap.get("endTime")+"\n\n\n"+
-                "作业内容  ："+detailsMap.get("assign")+"\n\n"+
-                "评分状态  ："+detailsMap.get("gradeStatus")+"\n"
-            ;
+        str ="提交状态  ："+detailsMap.get("submitStatus")+"\n"+
+                "开始时间  ："+detailsMap.get("beginTime")+"\n"+
+                "结束时间  ："+detailsMap.get("endTime")+"\n\n"+
+                "作业内容  ："+detailsMap.get("assign")+"\n"+
+                "评分状态  ："+detailsMap.get("gradeStatus")+"\n";
+        Log.i("CourseWork","UtilgetDialogMessage"+str);
 
          return str;
+    }
+
+    public static Map<String, String> getDetailsMap() {
+        return detailsMap;
     }
 }

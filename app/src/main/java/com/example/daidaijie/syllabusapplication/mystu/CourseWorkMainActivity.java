@@ -159,7 +159,7 @@ public class CourseWorkMainActivity extends BaseActivity {
 
     /**防止handle内存泄漏*/
     @Override
-    public void onDestroy() {
+    protected void onDestroy() {
         super.onDestroy();
         worklistHandler.removeCallbacksAndMessages(null);
         workdetailsHandler.removeCallbacksAndMessages(null);

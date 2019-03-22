@@ -121,7 +121,8 @@ public class CommonWebActivity extends BaseActivity implements ShareWXDialog.OnS
         if (mWebView.canGoBack()) {
             mWebView.goBack();
         } else {
-            super.onBackPressed();
+            //super.onBackPressed();
+            finish();
         }
     }
 

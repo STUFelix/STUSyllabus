@@ -240,7 +240,7 @@ public class MyStuMainActivity extends BaseActivity {
 
     /**防止handle内存泄漏*/
     @Override
-    public void onDestroy() {
+    protected void onDestroy() {
         super.onDestroy();
         mystumainactivity_cookiesHandler.removeCallbacksAndMessages(null);
         mcourseListHandler.removeCallbacksAndMessages(null);

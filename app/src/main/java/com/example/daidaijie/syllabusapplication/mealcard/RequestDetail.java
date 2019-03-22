@@ -50,13 +50,18 @@ public class RequestDetail {
 
             @Override
             public void onResponse(Call<TheBean> call , Response<TheBean> response) {
-                TheBean bean = response.body();
-                toParseBean(bean);
-
-                Message message = Message.obtain();
-                message.obj = DList;
-                message.what = 20001;
-                mHandle.sendMessage(message);
+                int code =response.code();
+                if (response!=null && code!=400) {
+                    TheBean bean = response.body();
+                    toParseBean(bean);
+                    Message message = Message.obtain();
+                    message.obj = DList;
+                    message.what = 20001;
+                    mHandle.sendMessage(message);
+                }else {
+                    Toast.makeText(context,"Error：请求失败",Toast.LENGTH_SHORT).show();
+                    swipeRefreshLayout.setRefreshing(false);
+                }
             }
 
             @Override
@@ -73,19 +78,26 @@ public class RequestDetail {
     public void toParseBean(TheBean theBean){
 
         for (int i=0;i<theBean.getLength();i++){
-            Map<String,String> map =new HashMap<>();
-            String date = theBean.getDetail().get(i).getDate();
-            String time = theBean.getDetail().get(i).getTime();
-            String flow = theBean.getDetail().get(i).getFlow();
-            String kind = theBean.getDetail().get(i).getKind();
-            String name = theBean.getDetail().get(i).getName();
+            try {
+                Map<String,String> map =new HashMap<>();
+                String date = theBean.getDetail().get(i).getDate();
+                String time = theBean.getDetail().get(i).getTime();
+                String flow = theBean.getDetail().get(i).getFlow();
+                String kind = theBean.getDetail().get(i).getKind();
+                String name = theBean.getDetail().get(i).getName();
 
-            map.put("date",date);
-            map.put("time",time);
-            map.put("flow",flow);
-            map.put("kind",kind);
-            map.put("name",name);
-            DList.add(map);
+                map.put("date",date);
+                map.put("time",time);
+                map.put("flow",flow);
+                map.put("kind",kind);
+                map.put("name",name);
+                DList.add(map);
+            }catch (Exception e){
+                Toast.makeText(context,"Error：异常",Toast.LENGTH_SHORT).show();
+                swipeRefreshLayout.setRefreshing(false);
+                e.printStackTrace();
+            }
+
         }
     }
 }

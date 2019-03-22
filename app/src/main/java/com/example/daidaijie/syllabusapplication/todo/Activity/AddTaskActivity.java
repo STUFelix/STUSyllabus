@@ -60,6 +60,11 @@ public class AddTaskActivity extends AppCompatActivity {
         toDoHasDateSwitchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                /** FragmentManager fragmentManager = getSupportFragmentManager();
+                 FragmentTransaction transaction = fragmentManager.beginTransaction();
+                 应该放到这里，不然transaction不是同一个，多次点击bug
+                 * */
+
                 if (isChecked) {
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     FragmentTransaction transaction = fragmentManager.beginTransaction();

@@ -18,7 +18,7 @@ class RetrofitCreate {
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://118.126.92.214:8083/")
+                .baseUrl("https://class.stuapps.com")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())

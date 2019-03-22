@@ -54,9 +54,9 @@ public  class  CookiesRequest  {
 
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-
+                int code =response.code();
                 try {
-                    if(response.body()!=null){
+                    if(response.body()!=null && code!=400 ){
                     String str =response.body().string();
                     JSONObject jsonObject = new JSONObject(str);
                     String tcookies =jsonObject.getString("Cookie");
@@ -66,7 +66,7 @@ public  class  CookiesRequest  {
                         message.obj = tcookies;
                         message.what = 10002;
                         mainactivity_cookiesHandler.sendMessage(message);
-                    }else {
+                    }else if(mainactivity_cookiesHandler == null) {
                         Message message = Message.obtain();
                         message.obj = tcookies;
                         message.what = 10001;

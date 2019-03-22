@@ -43,14 +43,28 @@ public class RequestBalance {
 
         @Override
         public void onResponse(Call<YKTBean> call , Response<YKTBean> response) {
-            mCookie = response.headers().get("Cookie");
-            mBalance = response.body().getBalance();
-            str = mBalance +"#"+mCookie;
+            int code = response.code();
+            if(response.body()!=null && code != 400){
+                try{
+                    mCookie = response.headers().get("Cookie");
+                    mBalance = response.body().getBalance();
+                    str = mBalance +"#"+mCookie;
 
-            Message message =Message.obtain();
-            message.obj =str;
-            message.what =10001;
-            mHandler.sendMessage(message);
+                    Message message =Message.obtain();
+                    message.obj =str;
+                    message.what =10001;
+                    mHandler.sendMessage(message);
+                }catch (Exception e){
+                    Toast.makeText(context,"Error：异常",Toast.LENGTH_SHORT).show();
+                    swipeRefreshLayout.setRefreshing(false);
+                    e.printStackTrace();
+                }
+
+            }else {
+                Toast.makeText(context,"Error：请求失败",Toast.LENGTH_SHORT).show();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+
         }
 
         @Override

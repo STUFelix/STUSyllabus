@@ -50,9 +50,9 @@ public class CourseListRequest {
             @Override
 
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
+                   int code= response.code();
                 try {
-                    if (response.body()!=null){
+                    if (response.body()!=null&&code!=400){
                         String str =response.body().string();
                         JSONObject jsonObject = new JSONObject(str);
                         Message courseListmsg = new Message();

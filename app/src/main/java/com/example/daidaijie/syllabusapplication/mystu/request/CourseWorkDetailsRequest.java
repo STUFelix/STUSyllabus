@@ -45,21 +45,14 @@ public class CourseWorkDetailsRequest {
 
         Call<ResponseBody> call = retrofit.getCourseDetails(Cookie, assign_linkid);
 
-
-        //步骤6:发送网络请求(异步)
-
         call.enqueue(new Callback<ResponseBody>() {
-
-            //请求成功时回调
 
             @Override
 
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                // 请求处理,输出结果
-
+                int code = response.code();
                 try {
-                    if (response.body()!=null) {
+                    if (response.body()!=null&&code!=400) {
                         String str = response.body().string();
                         JSONObject jsonObject = new JSONObject(str);
                         Message workdetailsmsg = new Message();
@@ -77,7 +70,6 @@ public class CourseWorkDetailsRequest {
 
             }
 
-            //请求失败时回调
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable throwable) {
                 Toast.makeText(context,"作业详情请求失败\n请检测网络后刷新",Toast.LENGTH_SHORT).show();

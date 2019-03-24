@@ -233,7 +233,7 @@ public class MealCardActivity extends BaseActivity implements RadioGroup.OnCheck
             count_today_string = count_today_string+"+"+count_today_cost[i];
         }
 
-        tv_today_consumer.setText("今日消费："+count_today_string+"="+String.format("%.1f",count_today_cost_amount)+"元");
+        tv_today_consumer.setText("今日消费："+count_today_string+" = "+String.format("%.1f",count_today_cost_amount)+" 元");
         tv_today_consumer.setTextSize(15);
         tv_count_cost.setText("支出总计：\t"+String.format("%.1f",count_cost)+"  元");
         tv_count_cost.setTextSize(20);

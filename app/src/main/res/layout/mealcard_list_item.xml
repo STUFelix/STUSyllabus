@@ -47,10 +47,11 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:scaleType="fitXY"
-            android:background="@drawable/mealcard_flow"
             android:layout_toLeftOf="@+id/mealcard_item_flow"
             android:layout_marginRight="5dp"
             />
+        <!--android:background="@drawable/mealcard_flow"-->
+
 
         <TextView
             android:id="@+id/mealcard_item_flow"

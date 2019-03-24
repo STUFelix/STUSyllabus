@@ -6,12 +6,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 import com.example.daidaijie.syllabusapplication.App;
@@ -25,17 +25,17 @@ import java.util.Map;
 import butterknife.BindView;
 
 public class CourseWareActivity extends BaseActivity {
-    List<Map<String,Object>> dataList =new ArrayList<>();
-    ListView listView;
-    private String Cookie;
-    private SwipeRefreshLayout refreshLayout;
-
-    @BindView(R.id.titleTextView)
-    TextView mTitleTextView;
+    @BindView(R.id.refreshLayout)
+    SwipeRefreshLayout refreshLayout;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.courseware_list_View)
+    ListView listView;
+    @BindView(R.id.courseware_click)
+    FloatingActionButton floatingActionButton;
 
-
+    private String Cookie;
+    List<Map<String,Object>> dataList =new ArrayList<>();
     private Handler coursewareHandler =new Handler(){
         @Override
         public void handleMessage(Message msg){
@@ -51,15 +51,19 @@ public class CourseWareActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listView= (ListView)findViewById(R.id.courseware_list_View);
         setupTitleBar(mToolbar);
-        refreshLayout = (SwipeRefreshLayout)findViewById(R.id.refreshLayout);
         refreshLayout.setColorSchemeResources(
                 android.R.color.holo_blue_light,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light
         );
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         getParameter();//数据请求
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -126,7 +130,7 @@ public class CourseWareActivity extends BaseActivity {
                 String fileLink=infoMap.get("fileLink");
                 String fileName=infoMap.get("fileName");
                 Toast.makeText(CourseWareActivity.this,
-                        "fileLink :"+fileLink+"\n"+"fileName :"+fileName,
+                        "fileName :"+fileName+"\n"+"fileLink :"+fileLink,
                         Toast.LENGTH_SHORT).show();
                 download(fileLink);
             }

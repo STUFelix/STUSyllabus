@@ -161,7 +161,11 @@ public class CourseWorkUtil {
 
 
     public static String getAssignLinkId(int position) {
-        return Wlist.get(position).get("assignLinkId");
+       if (Wlist.size()>position) {
+           return Wlist.get(position).get("assignLinkId");
+       }else {
+           return "";
+       }
     }
 
     public static String getDialogMessage() {

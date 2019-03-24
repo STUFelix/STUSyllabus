@@ -42,9 +42,6 @@ public class CourseListRequest {
 
         Call<ResponseBody> call = retrofit.getCourseList(cookies,years,semester);
 
-        Log.i("CourseListRequest",cookies+"#"+years+"#"+semester);
-
-
         call.enqueue(new Callback<ResponseBody>() {
 
             @Override

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.daidaijie.syllabusapplication.R;
 import com.example.daidaijie.syllabusapplication.base.BaseActivity;
@@ -60,6 +61,7 @@ public class CourseWorkDetailsActivity extends BaseActivity {
 
         tv_content.setText(detailsMap.get("assign"));
         tv_content.setMovementMethod(ScrollingMovementMethod.getInstance());
+        Toast.makeText(CourseWorkDetailsActivity.this,"没有链接的数据\n若有链接请到官网确认",Toast.LENGTH_SHORT).show();
 
     }
 

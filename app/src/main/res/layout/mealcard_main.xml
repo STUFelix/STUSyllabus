@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#e2e4fe"><!-- 此处需设置listView背景#e2e4fe -->
+    android:background="#F0F0F0"><!-- 此处需设置listView背景#e2e4fe -->
 
 
     <android.support.v7.widget.Toolbar
@@ -127,8 +127,8 @@
         android:layout_marginTop="10dp"
         android:gravity="center">
         <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:scaleType="fitXY"
             android:background="@drawable/mealcard_amount"
             android:layout_toLeftOf="@+id/mealcard_TV_countCosts"

@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +46,8 @@ public class MyStuMainActivity extends BaseActivity {
     ListView listView;
     @BindView(R.id.refreshLayout)
     SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.courselist_click)
+    FloatingActionButton mfloatingActionButton;
 
     private String cookies ="";
     private String year = "";
@@ -111,6 +115,13 @@ public class MyStuMainActivity extends BaseActivity {
     }
 
     private void mInit() {
+        mfloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(MyStuMainActivity.this,CourseInfoActivity.class);
+                startActivity(intent);
+            }
+        });
         refreshLayout.setEnabled(true);
         refreshLayout.setRefreshing(true);
         refreshLayout.setColorSchemeResources(

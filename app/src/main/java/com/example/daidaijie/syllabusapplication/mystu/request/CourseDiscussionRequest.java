@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.widget.Toast;
 import com.example.daidaijie.syllabusapplication.mystu.CourseFilesBean;
+import com.example.daidaijie.syllabusapplication.mystu.CourseInfoActivity;
 import com.example.daidaijie.syllabusapplication.mystu.DiscussionBean;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -26,7 +27,6 @@ public  class CourseDiscussionRequest {
     private SwipeRefreshLayout swipeRefreshLayout;
     private String Cookie;
     private int pageSize;
-    private int pageNo;
     private Handler handler;
     private static List<DiscussionBean> discussionBean;
     public static CourseFilesBean getCourseFilesBean(int position){
@@ -40,19 +40,21 @@ public  class CourseDiscussionRequest {
     public static List<Map<String,String>> getMlist(){
         return  Mlist;
     }
-
+    private int pageNo;
+    private int pageNoTemp;
 
     public CourseDiscussionRequest(){
 
     }
 
-    public CourseDiscussionRequest(String Cookie, int pageSize, int pageNo, Handler handler,Context mcontext,SwipeRefreshLayout swipeRefreshLayout) {
+    public CourseDiscussionRequest(String Cookie, int pageSize, int pageNo, Handler handler,Context mcontext,SwipeRefreshLayout swipeRefreshLayout,int pageNoTemp) {
         this.Cookie = Cookie;
         this.pageSize = pageSize;
         this.pageNo = pageNo;
         this.handler = handler;
         this.mcontext =mcontext;
         this.swipeRefreshLayout =swipeRefreshLayout;
+        this.pageNoTemp =pageNoTemp;
     }
 
     public void getCourseDiscussion() {
@@ -70,16 +72,24 @@ public  class CourseDiscussionRequest {
                 int code = response.code();
                 try {
                         if(response!=null&&code!=400){
+                            CourseInfoActivity.pageNoTemp=pageNo;
+                            Log.i("CourseDiscussionRequest","CourseInfoActivity.pageNoTemp"+CourseInfoActivity.pageNoTemp);
                             String json = response.body().string();
                             toParse(json);
-                             handler.sendEmptyMessage(20001);
+                            if (Clist.size()!=0) {
+                                handler.sendEmptyMessage(20001);
+                            }
                         }else {
                              Toast.makeText(mcontext,"Error：请求失败",Toast.LENGTH_SHORT).show();
                             swipeRefreshLayout.setRefreshing(false);
+                            CourseInfoActivity.pageNo=pageNoTemp;
+                            Log.i("CourseDiscussionRequest","CourseInfoActivity.pageNo"+CourseInfoActivity.pageNo);
                         }
                     } catch (IOException e) {
                     e.printStackTrace();
-                    Toast.makeText(mcontext,"Error：请求失败",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mcontext,"Error：异常",Toast.LENGTH_SHORT).show();
+                    CourseInfoActivity.pageNo=pageNoTemp;
+                    Log.i("CourseDiscussionRequest","CourseInfoActivity.pageNo"+CourseInfoActivity.pageNo);
                     }
             }
 

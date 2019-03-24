@@ -36,16 +36,15 @@ public class CourseInfoActivity extends BaseActivity {
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
-
-    /**请求的页码，固定每页10个item*/
+    public static int pageNoTemp =1;
     public static int pageNo = 1;
+    /**请求的页码，固定每页10个item*/
     private final int pageSize = 10;
     private List<Map<String,String>> mClist =new ArrayList<Map<String, String>>();
     private List<Map<String,String>> mMlist =new ArrayList<Map<String, String>>();
     private Boolean flag=true;
 
     private String cookies;
-
 
 
     private Handler mHandler=new Handler(){
@@ -60,7 +59,9 @@ public class CourseInfoActivity extends BaseActivity {
                     Toast.makeText(CourseInfoActivity.this,"已无更多信息\n存疑请到官网确认",Toast.LENGTH_SHORT).show();
                     flag=false;
                     pageNo--;
+                    pageNoTemp--;
                 }else {
+                    /**最主要的函数*/
                     toRequestAdapter();
                     flag=true;
                 }
@@ -81,20 +82,12 @@ public class CourseInfoActivity extends BaseActivity {
     protected int getContentView() {
         return R.layout.mystu_courseinfolist;
     }
-
     /**防止Handle内存泄漏*/
     @Override
     protected void onDestroy(){
         super.onDestroy();
         mHandler.removeCallbacksAndMessages(null);
     }
-
-    private void toRequest() {
-        swipeRefreshLayout.setRefreshing(true);
-        CourseDiscussionRequest courseDiscussion = new CourseDiscussionRequest(cookies,pageSize,pageNo,mHandler,CourseInfoActivity.this,swipeRefreshLayout);
-        courseDiscussion.getCourseDiscussion();
-    }
-
     private void toRequestAdapter(){
         mRvTestList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRvTestList.setAdapter(new CourseInfoListAdapter(this));
@@ -119,9 +112,18 @@ public class CourseInfoActivity extends BaseActivity {
                 toRequest();
             }
         });
-
-
     }
+
+    private void toRequest() {
+        swipeRefreshLayout.setRefreshing(true);
+        Log.i("CourseInfoActivity","toRequest"+pageNo+"#Temp:"+pageNoTemp);
+        CourseDiscussionRequest courseDiscussion =
+                new CourseDiscussionRequest
+                        (cookies,pageSize,pageNo,mHandler,CourseInfoActivity.this,swipeRefreshLayout,pageNoTemp);
+        courseDiscussion.getCourseDiscussion();
+    }
+
+
 
     private void setListening(){
         floatingActionButton_up.setOnClickListener(new View.OnClickListener() {
@@ -130,11 +132,12 @@ public class CourseInfoActivity extends BaseActivity {
                 if(!CourseDiscussionRequest.isFastDoubleClick()){
 
                     if(pageNo >= 2){
-                    pageNo--;
-                    flag=false;
-                    if(mClist.size()!=0)mClist.clear();
-                    if(mMlist.size()!=0)mMlist.clear();
-                    toRequest();
+                        flag=false;
+                        if(mClist.size()!=0)mClist.clear();
+                        if(mMlist.size()!=0)mMlist.clear();
+                        pageNo--;
+                        Log.i("CourseInfoActivity","setListeningup"+pageNo);
+                        toRequest();
                     }
                  }else {
                     Toast.makeText(CourseInfoActivity.this,"请勿过快点击",Toast.LENGTH_SHORT).show();
@@ -148,9 +151,10 @@ public class CourseInfoActivity extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     if (!CourseDiscussionRequest.isFastDoubleClick()){
-                        pageNo++;
                         if(mClist.size()!=0)mClist.clear();
                         if(mMlist.size()!=0)mMlist.clear();
+                        pageNo++;
+                        Log.i("CourseInfoActivity","setListeningdown"+pageNo);
                         toRequest();
                     }else {
                         Toast.makeText(CourseInfoActivity.this,"请勿过快点击",Toast.LENGTH_SHORT).show();

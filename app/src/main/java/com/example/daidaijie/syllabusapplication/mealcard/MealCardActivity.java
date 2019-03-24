@@ -28,6 +28,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
 
+/**Created by STUFelix
+ * 2019.03
+ * */
 public class MealCardActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener{
 
     @BindView(R.id.card_listView)
@@ -101,7 +104,7 @@ public class MealCardActivity extends BaseActivity implements RadioGroup.OnCheck
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
+        //ButterKnife.bind(this);
         init();
 
         requestBalance = new RequestBalance(username,password,handler,swipeRefreshLayout,MealCardActivity.this);
@@ -117,7 +120,11 @@ public class MealCardActivity extends BaseActivity implements RadioGroup.OnCheck
     private void  init(){
 
         setupTitleBar(mToolbar);
-
+        /**拿到账号密码*/
+        Realm xRealm = Realm.getDefaultInstance();
+        UserLogin userLogin =xRealm.where(UserLogin.class).findFirst();
+        username = userLogin.getUsername();
+        password = userLogin.getPassword();
         swipeRefreshLayout.setEnabled(true);
         swipeRefreshLayout.setRefreshing(true);
         swipeRefreshLayout.setColorSchemeResources(
@@ -137,11 +144,7 @@ public class MealCardActivity extends BaseActivity implements RadioGroup.OnCheck
         });
 
 
-        /**拿到账号密码*/
-        Realm xRealm = Realm.getDefaultInstance();
-        UserLogin userLogin =xRealm.where(UserLogin.class).findFirst();
-        username = userLogin.getUsername();
-        password = userLogin.getPassword();
+
 
         /**View对应的设置*/
         Drawable drawable_balance = getResources().getDrawable(R.drawable.mealcard_wallet);

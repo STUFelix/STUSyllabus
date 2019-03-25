@@ -9,6 +9,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.tendcloud.tenddata.TCAgent;
 
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
@@ -79,7 +80,10 @@ public class App extends Application {
 
         initVersion();
 
-
+        //初始化 talking data
+        TCAgent.LOG_ON=true;
+        TCAgent.init(this);
+        TCAgent.setReportUncaughtExceptions(true);
     }
 
     private void initVersion() {

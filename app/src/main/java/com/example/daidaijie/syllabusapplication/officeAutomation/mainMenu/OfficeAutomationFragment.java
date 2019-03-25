@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.example.daidaijie.syllabusapplication.Constants;
 import com.example.daidaijie.syllabusapplication.R;
 import com.example.daidaijie.syllabusapplication.adapter.OAItemAdapter;
 import com.example.daidaijie.syllabusapplication.base.BaseFragment;
@@ -19,6 +20,7 @@ import com.example.daidaijie.syllabusapplication.officeAutomation.OAModelCompone
 import com.example.daidaijie.syllabusapplication.officeAutomation.oaDetail.OADetailActivity;
 import com.example.daidaijie.syllabusapplication.user.UserComponent;
 import com.example.daidaijie.syllabusapplication.util.SnackbarUtil;
+import com.tendcloud.tenddata.TCAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -134,6 +136,7 @@ public class OfficeAutomationFragment extends BaseFragment implements OAContract
         mOAItemAdapter.setOnOAReadListener(new OAItemAdapter.OnOAReadListener() {
             @Override
             public void onOARead(OABean oaBean, int position) {
+                TCAgent.onEvent(mActivity, Constants.OA_EVENT_ID, oaBean.getID() + "");
                 Intent intent = OADetailActivity.getIntent(mActivity, mPosition, position);
                 startActivity(intent);
                 mOAPresenter.setRead(oaBean, true);

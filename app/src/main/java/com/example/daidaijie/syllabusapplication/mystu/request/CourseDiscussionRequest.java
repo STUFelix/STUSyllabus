@@ -71,7 +71,7 @@ public  class CourseDiscussionRequest {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 int code = response.code();
                 try {
-                        if(response!=null&&code!=400){
+                        if(response.body()!=null&&code!=400){
                             CourseInfoActivity.pageNoTemp=pageNo;
                             Log.i("CourseDiscussionRequest","CourseInfoActivity.pageNoTemp"+CourseInfoActivity.pageNoTemp);
                             String json = response.body().string();

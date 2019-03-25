@@ -23,6 +23,9 @@ import java.util.Map;
 
 import butterknife.BindView;
 
+/**Created by STUFelix
+ * 2019.3
+ * */
 public class CourseInfoActivity extends BaseActivity {
 
     @BindView(R.id.rv_testlist)

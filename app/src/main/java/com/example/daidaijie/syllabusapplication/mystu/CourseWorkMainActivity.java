@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,6 +30,8 @@ public class CourseWorkMainActivity extends BaseActivity {
     SwipeRefreshLayout refreshLayout;
     @BindView(R.id.course_rv_testlist)
     RecyclerView mRvTestList;
+    @BindView(R.id.coursework_click)
+    FloatingActionButton mfloatingActionButton;
     private String Cookie;
     private boolean avoidMultiplyRequestBug = true;
 
@@ -94,6 +97,12 @@ public class CourseWorkMainActivity extends BaseActivity {
         refreshLayout.setEnabled(true);
         refreshLayout.setRefreshing(true);
 
+        mfloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         String course_linkid = getIntent().getStringExtra("courseLinkId");
 
         App app = (App) getApplication();

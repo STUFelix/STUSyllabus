@@ -142,7 +142,8 @@ dependencies {
     }
     //    LeakCanary
     compile files('libs/joda-time-2.1.jar')
-
+    //Talkingdata
+    compile files('libs/TalkingdataAnalytics.jar')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:design:25.3.1'

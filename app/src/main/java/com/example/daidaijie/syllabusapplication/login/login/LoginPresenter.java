@@ -8,6 +8,8 @@ import com.example.daidaijie.syllabusapplication.di.qualifier.user.UnLoginUser;
 import com.example.daidaijie.syllabusapplication.di.scope.PerActivity;
 import com.example.daidaijie.syllabusapplication.user.IUserModel;
 import com.example.daidaijie.syllabusapplication.util.LoggerUtil;
+import com.tendcloud.tenddata.TCAgent;
+import com.tendcloud.tenddata.TDAccount;
 
 import javax.inject.Inject;
 
@@ -58,6 +60,9 @@ public class LoginPresenter implements LoginContract.presenter {
                     @Override
                     public void onCompleted() {
                         mView.showLoading(false);
+                        //talking data 注册登陆
+                        TCAgent.onRegister(username, TDAccount.AccountType.REGISTERED, username);
+                        TCAgent.onLogin(username, TDAccount.AccountType.REGISTERED, username);
                         mView.toMainView();
                     }
 

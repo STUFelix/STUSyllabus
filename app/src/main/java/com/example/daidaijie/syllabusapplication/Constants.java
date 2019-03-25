@@ -12,5 +12,5 @@ public class Constants {
     public static final String BMOB_APP_KEY = "20b6ba15d6ff51ca354407e8e6bf3bf1";
 
     //talking data event id
-    public static final String OA_EVENT_ID = "/Click/OA/OAList";
+    public static final String OA_EVENT_ID = "Click/OA/OAList";
 }

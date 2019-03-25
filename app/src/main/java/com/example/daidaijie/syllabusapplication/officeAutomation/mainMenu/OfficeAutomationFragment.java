@@ -26,7 +26,9 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -136,7 +138,12 @@ public class OfficeAutomationFragment extends BaseFragment implements OAContract
         mOAItemAdapter.setOnOAReadListener(new OAItemAdapter.OnOAReadListener() {
             @Override
             public void onOARead(OABean oaBean, int position) {
-                TCAgent.onEvent(mActivity, Constants.OA_EVENT_ID, oaBean.getID() + "");
+                Map oaMap = new HashMap();
+                oaMap.put("id", oaBean.getID());
+                oaMap.put("DOCVALIDDATE", oaBean.getDOCVALIDDATE());
+                oaMap.put("DEPARTMENTNAME", oaBean.getDEPARTMENTNAME());
+                oaMap.put("SUBCOMPANYNAME", oaBean.getSUBCOMPANYNAME());
+                TCAgent.onEvent(mActivity, Constants.OA_EVENT_ID, oaBean.getID() + "", oaMap);
                 Intent intent = OADetailActivity.getIntent(mActivity, mPosition, position);
                 startActivity(intent);
                 mOAPresenter.setRead(oaBean, true);

@@ -4,9 +4,9 @@
 ### 主界面  
  - Banner轮播  
  - 各个页面的跳转  
-[主界面] (https://github.com/STUFelix/STUSyllabus/blob/master/image/%E4%B8%BB%E7%95%8C%E9%9D%A2.jpg)
+[主界面](https://github.com/STUFelix/STUSyllabus/blob/master/image/%E4%B8%BB%E7%95%8C%E9%9D%A2.jpg)
 ### 课表界面  
-[课程表界面] (https://github.com/STUFelix/STUSyllabus/blob/master/image/%E8%AF%BE%E7%A8%8B%E8%A1%A8%E7%95%8C%E9%9D%A2.jpg)
+[课程表界面](https://github.com/STUFelix/STUSyllabus/blob/master/image/%E8%AF%BE%E7%A8%8B%E8%A1%A8%E7%95%8C%E9%9D%A2.jpg)
 
   -----------------------------
 ## 新添功能  

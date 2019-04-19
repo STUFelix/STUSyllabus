@@ -57,6 +57,10 @@ public class CommonWebActivity extends BaseActivity implements ShareWXDialog.OnS
         setting.setAppCacheEnabled(true);
         setting.setDomStorageEnabled(true);
         setting.setJavaScriptEnabled(true);
+        /**触摸缩放*/
+        setting.setSupportZoom(true);
+        setting.setBuiltInZoomControls(true);
+
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
@@ -89,6 +93,7 @@ public class CommonWebActivity extends BaseActivity implements ShareWXDialog.OnS
                 }
             }
 
+            /**上方蓝色的进度条显示*/
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 mProgressBar.setProgress(newProgress);

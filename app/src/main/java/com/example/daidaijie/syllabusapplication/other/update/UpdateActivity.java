@@ -66,7 +66,7 @@ public class UpdateActivity extends BaseActivity implements UpdateContract.view,
         mNowVersionTextView.setText(App.versionName);
 
 
-        mPusherTextView.setText("13计算机李宇杰");
+        mPusherTextView.setText("17计算机肖凯炫");
 
         mCopyUpdateButton.setVisibility(View.GONE);
         mUpdateButton.setVisibility(View.GONE);

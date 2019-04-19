@@ -83,12 +83,17 @@ public class OADetailPresenter implements OADetailContract.presenter {
         }
     }
 
+    /**修改List<OABean>为空时，空指针异常错误*/
     @Override
     public void start() {
         OABean oaBean = mIOAModel.getOABean(mPosition, mSubPosition);
-        mView.showView(oaBean.getContent());
-        if (oaBean.getACCESSORYCOUNT() > 0) {
-            loadData();
+        if(oaBean != null){
+            mView.showView(oaBean.getContent());
+            if (oaBean.getACCESSORYCOUNT() > 0) {
+                loadData();
+            }
+        }else{
+            mView.showView("加载失败……");
         }
     }
 }

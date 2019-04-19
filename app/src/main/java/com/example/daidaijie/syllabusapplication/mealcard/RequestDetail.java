@@ -51,7 +51,7 @@ public class RequestDetail {
             @Override
             public void onResponse(Call<TheBean> call , Response<TheBean> response) {
                 int code =response.code();
-                if (response!=null && code!=400) {
+                if (response.body()!=null && code!=400) {
                     TheBean bean = response.body();
                     toParseBean(bean);
                     Message message = Message.obtain();
@@ -76,7 +76,6 @@ public class RequestDetail {
     }
 
     public void toParseBean(TheBean theBean){
-
         for (int i=0;i<theBean.getLength();i++){
             try {
                 Map<String,String> map =new HashMap<>();

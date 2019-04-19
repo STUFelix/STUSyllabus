@@ -137,7 +137,10 @@ public class OAModel implements IOAModel {
 
     @Override
     public OABean getOABean(int position, int subPosition) {
-        return mOAListMap.get(position).get(subPosition);
+        if(subPosition<mOAListMap.get(position).size()){
+            return mOAListMap.get(position).get(subPosition);
+        }
+        return null;
     }
 
     @Override

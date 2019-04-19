@@ -61,7 +61,7 @@ public class CourseWorkDetailsActivity extends BaseActivity {
 
         tv_content.setText(detailsMap.get("assign"));
         tv_content.setMovementMethod(ScrollingMovementMethod.getInstance());
-        Toast.makeText(CourseWorkDetailsActivity.this,"没有链接的数据\n若有链接请到官网确认",Toast.LENGTH_SHORT).show();
+        Toast.makeText(CourseWorkDetailsActivity.this,"图片与链接请到官网确认",Toast.LENGTH_SHORT).show();
 
     }
 

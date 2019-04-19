@@ -151,9 +151,10 @@ public class MealCardActivity extends BaseActivity implements RadioGroup.OnCheck
         drawable_balance.setBounds(0,0,120,120);
         tv_balance.setCompoundDrawables(drawable_balance,null,null,null);
 
+        /**
         Drawable drawable_consume_details =getResources().getDrawable(R.drawable.mealcard_time);
         drawable_consume_details.setBounds(0,0,35,35);
-        tv_consume_details_icon.setCompoundDrawables(null,null,drawable_consume_details,null);
+        tv_consume_details_icon.setCompoundDrawables(null,null,drawable_consume_details,null);*/
 
         time_rg = (RadioGroup) findViewById(R.id.mealcard_rg);
         button1 = (RadioButton) findViewById(R.id.mealcard_rb_1);

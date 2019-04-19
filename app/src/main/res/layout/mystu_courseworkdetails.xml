@@ -26,8 +26,6 @@
             android:textSize="20sp"/>
     </android.support.v7.widget.Toolbar>
 
-
-
     <TextView
         android:id="@+id/courseworkdetails_title"
         android:layout_width="match_parent"
@@ -44,8 +42,8 @@
         android:id="@+id/courseworkdetails_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="13sp"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp"
         android:textStyle="italic"
         android:textColor="#696969"
         android:text="开始时间： 2017年11月16日 星期四 19:10"
@@ -54,50 +52,61 @@
         android:id="@+id/courseworkdetails_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
-        android:layout_gravity="center"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textStyle="italic"
         android:textColor="#696969"
         android:text="结束时间： 2017年11月21日 星期二 19:10"
         />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"
+        android:layout_marginTop="5dp"
+        android:alpha="0.7"></View>
     <TextView
         android:id="@+id/courseworkdetails_submitstate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
         android:textStyle="italic"
-        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="15dp"
-        android:textColor="#8B8989"
+        android:textColor="#000000"
         android:text="提交状态： 此作业无需在网上提交任何内容"/>
     <TextView
         android:id="@+id/courseworkdetails_gradingstate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
-        android:layout_gravity="center"
         android:textStyle="italic"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
-        android:textColor="#8B8989"
+        android:textColor="#000000"
         android:text="评分状态： 无" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"
+        android:layout_marginTop="5dp"
+        android:alpha="0.9"></View>
 
     <TextView
         android:id="@+id/courseworkdetails_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="5dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:textSize="18sp"
-        android:textStyle="bold"
+        android:textStyle="normal"
+        android:textColor="#000000"
         android:scrollbars="vertical"
         android:text="作业内容: 很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据很多很多很长的测试数据"
         />
-
-
 
 </LinearLayout>

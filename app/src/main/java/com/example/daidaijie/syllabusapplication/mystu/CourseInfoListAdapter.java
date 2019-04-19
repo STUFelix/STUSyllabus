@@ -32,7 +32,7 @@ public class CourseInfoListAdapter extends CourseInfoExpandableTextAdapter<Cours
 
         int count = (CourseInfoActivity.pageNo-1)*10+position+1;
         holder.head.setText(String.valueOf(count));
-        if(CourseDiscussionRequest.getCourseFilesLength(position)!=0){
+        if(CourseDiscussionRequest.getCourseFilesLength(position)>0){
             holder.course_name.setText(CourseDiscussionRequest.getCourseName(position));
             holder.course_name.setTextColor(Color.parseColor("#0000ff"));
             holder.course_name.setClickable(true);

@@ -40,10 +40,7 @@
             android:text="余额："
             android:textStyle="bold"
             android:textSize="30sp"
-            android:shadowDx="10.0"
-            android:shadowDy="10.0"
-            android:shadowColor="#D4D4D4"
-            android:shadowRadius="3.0"
+
             />
         <TextView
             android:id="@+id/mealcard_TV_balance"
@@ -85,8 +82,6 @@
             android:layout_marginTop="10dp"
             android:textStyle="italic"
             android:text="消费详情："
-            android:drawablePadding="5dp"
-            android:drawableRight="@drawable/mealcard_time"
             android:textSize="15sp"/>
     </LinearLayout>
 

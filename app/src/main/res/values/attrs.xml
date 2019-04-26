@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="LessonDetailLayout">
+        <attr name="titltText" format="string"></attr>
+        <attr name="titltTextColor" format="color"></attr>
+        <attr name="detailIcon" format="reference"></attr>
+        <attr name="editEnable" format="boolean"></attr>
+        <attr name="descText" format="string"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="StreamItemLayout">
+        <attr name="streamName" format="string"></attr>
+        <attr name="streamInfo" format="string"></attr>
+        <attr name="showLine" format="boolean"></attr>
+    </declare-styleable>
+
+
+
+    <declare-styleable name="ItemCardLayout">
+        <attr name="cardTitle" format="string"></attr>
+        <attr name="cardIcon" format="reference"></attr>
+    </declare-styleable>
+
+
+    <!--tag-->
+    <declare-styleable name="FlowLabelLayout">
+
+        <attr name="LayoutType" format="integer" />
+
+    </declare-styleable>
+
+    <declare-styleable name="MaxHeightView">
+        <attr name="mhv_HeightRatio" format="reference|float" />
+        <attr name="mhv_HeightDimen" format="reference|dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="SyllabusImageView">
+        <attr name="roundCornerRadius" format="dimension"/>
+        <attr name="placeHolderImage" format="reference"/>
+        <attr name="srcImage" format="reference"/>
+    </declare-styleable>
+
+
+</resources>

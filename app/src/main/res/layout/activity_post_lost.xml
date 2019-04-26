@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/defaultDarkBackground"
+    android:orientation="vertical"
+    tools:context="com.example.daidaijie.syllabusapplication.schoolDymatic.circle.postContent.PostContentActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="?attr/colorPrimary"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true"
+        android:gravity="center_vertical"
+        android:popupTheme="@style/AppTheme.PopupOverlay"
+        android:theme="@style/AppTheme.PopupOverlay"
+        android:transitionName="tool_bar"
+        app:titleTextColor="@android:color/white"
+        tools:targetApi="lollipop">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:singleLine="true"
+            android:text="发布动态"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/material_white"
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
+
+        <EditText
+            android:id="@+id/titleEditText"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@color/material_white"
+            android:gravity="top"
+            android:hint="请输入标题"
+            android:maxLength="140"
+            android:maxLines="10"
+            android:padding="8dp"
+            android:textColor="@color/defaultTextColor"
+            android:textColorHint="@color/defaultShowColor"
+            android:textSize="16sp" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/defaultShowColor" />
+
+        <EditText
+            android:id="@+id/descEditText"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="@color/material_white"
+            android:gravity="top|left"
+            android:hint="描述详细信息"
+            android:maxLength="140"
+            android:maxLines="10"
+            android:padding="8dp"
+            android:textColor="@color/defaultTextColor"
+            android:textColorHint="@color/defaultShowColor"
+            android:textSize="16sp" />
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/defaultShowColor" />
+
+        <EditText
+            android:id="@+id/localEditText"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@color/material_white"
+            android:gravity="top"
+            android:hint="丢物/拾物地址"
+            android:maxLength="140"
+            android:maxLines="10"
+            android:padding="8dp"
+            android:textColor="@color/defaultTextColor"
+            android:textColorHint="@color/defaultShowColor"
+            android:textSize="16sp" />
+
+        <View
+            android:id="@+id/view5"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/defaultShowColor" />
+
+        <EditText
+            android:id="@+id/contactEditText"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@color/material_white"
+            android:gravity="top"
+            android:hint="联系方式"
+            android:maxLength="140"
+            android:maxLines="10"
+            android:padding="8dp"
+            android:textColor="@color/defaultTextColor"
+            android:textColorHint="@color/defaultShowColor"
+            android:textSize="16sp" />
+
+        <View
+            android:id="@+id/view6"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/defaultShowColor" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="添加照片"
+            android:textColor="@color/defaultShowColor"
+            android:textSize="16sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/photoRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_below="@+id/contentTextView"
+            android:layout_marginTop="8dp"></android.support.v7.widget.RecyclerView>
+
+        <com.example.daidaijie.syllabusapplication.widget.FlowLabelLayout
+            android:id="@+id/postImgFlowLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            app:LayoutType="1">
+        </com.example.daidaijie.syllabusapplication.widget.FlowLabelLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/defaultShowColor"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:text="发布板块"
+        android:textColor="@color/defaultShowColor"
+        android:textSize="16sp" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/material_white"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp">
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/postAsObjectButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:checked="true"
+            android:text="寻物"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="14sp"
+            app:buttonTint="?attr/colorPrimary" />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/postAsPeopleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="寻主"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="14sp"
+            app:buttonTint="?attr/colorPrimary" />
+
+    </RadioGroup>
+
+</LinearLayout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/defaultLightBackground"
+    android:layout_height="match_parent"
+
+    tools:context="com.example.daidaijie.syllabusapplication.takeout.searchMenu.SearchTakeOutActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="?attr/colorPrimary"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true"
+        android:gravity="center_vertical"
+        android:theme="@style/AppTheme.PopupOverlay"
+        app:titleTextColor="@android:color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/searchEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/editLine"
+                android:background="@null"
+                android:gravity="bottom"
+                android:hint="搜索店内商品"
+                android:paddingBottom="4dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="48dp"
+                android:singleLine="true"
+                android:textColor="@color/material_white"
+                android:textColorHint="@color/defaultDarkBackgroundSelect"
+                android:textSize="16sp"/>
+
+
+            <ImageView
+                android:id="@+id/removeTextImageView"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_above="@+id/editLine"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:paddingBottom="4dp"
+                android:src="@drawable/ic_action_remove"
+                android:visibility="gone"/>
+
+            <View
+                android:id="@+id/editLine"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="8dp"
+                android:background="@color/greyF6Color"/>
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/dishesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginBottom="64dp"
+        android:background="@color/cardview_light_background">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <include
+        android:id="@+id/bottomLayout"
+        layout="@layout/item_takeout_bottom"/>
+
+</RelativeLayout>

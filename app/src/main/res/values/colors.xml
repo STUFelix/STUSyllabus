@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/material_blue_500</color>
+    <color name="colorPrimaryDark">@color/material_blue_700</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccentDark">@color/material_pink_600</color>
+
+    <color name="gridColor">#402b2b2b</color>
+
+    <color name="defaultTextColor">#424242</color>
+
+    <color name="defaultShowColor">#999999</color>
+
+    <color name="grey66Color">#666666</color>
+
+    <color name="defaultLightBackground">#FAFAFA</color>
+
+    <color name="greyF6Color">#F6F6F6</color>
+
+    <color name="defaultLineColor">@color/material_grey_300</color>
+
+    <color name="defaultDarkBackground">#ebebeb</color>
+
+    <color name="defaultDarkBackgroundSelect">#CCCCCC</color>
+
+    <color name="defaultSelectForeground">#20000000</color>
+
+
+    <color name="colorClassic">#F44336</color>
+    <color name="colorClassicDark">#E53935</color>
+
+    <color name="colorBlack">#393A3F</color>
+    <color name="colorBlackDark">#303135</color>
+
+    <color name="colorBili">#FA729A</color>
+    <color name="colorBiliDark">#fc4d80</color>
+
+</resources>

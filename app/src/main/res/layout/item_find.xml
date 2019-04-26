@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="4dp"
+    android:foreground="@drawable/fg_circle_card"
+    android:orientation="vertical"
+    app:cardPreventCornerOverlap="false"
+    app:cardBackgroundColor="@color/material_white"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="1dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:id="@+id/postInfoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="4dp"
+            android:gravity="top"
+            android:singleLine="true"
+            android:textColor="@color/defaultShowColor"
+            android:textSize="12sp"
+            tools:text="2016-08-06 17:58:20" />
+
+        <TextView
+            android:id="@+id/titleView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/postInfoTextView"
+            android:background="@drawable/bg_circle_cotent"
+            android:paddingTop="8dp"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="14sp"
+            tools:text="寻物" />
+
+        <TextView
+            android:id="@+id/localView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titleView"
+            android:background="@drawable/bg_circle_cotent"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="14sp"
+            tools:text="e" />
+
+        <TextView
+            android:id="@+id/decrView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/localView"
+            android:background="@drawable/bg_circle_cotent"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="14sp"
+            tools:text="详细描述" />
+
+        <TextView
+            android:id="@+id/contactView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/decrView"
+            android:background="@drawable/bg_circle_cotent"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="14sp"
+            tools:text="联系方式" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/photoRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="168dp"
+            android:layout_below="@+id/contactView"
+            android:layout_marginTop="8dp"></android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

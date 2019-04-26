@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingLeft="8dp"
+    android:id="@+id/examLayout"
+    android:paddingRight="8dp"
+    android:background="@color/defaultLightBackground">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/examStateTextView"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/examNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="程序设计基础"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/examTimeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            tools:text="时间　 : 2016.01.12  19:00-21:00"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/examWeekTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:lineSpacingExtra="2dp"
+            tools:text="时间　 : 2016.01.12  19:00-21:00"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/examRoomTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            tools:text="试室　 : E303"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="14sp"/>
+        <TextView
+            android:id="@+id/examPositionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            tools:text="座位号 : 60"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:id="@+id/examStateTextView"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="倒计时\n1天\n12:23:25"
+        android:gravity="center"
+        android:textColor="@color/material_red_500"
+        android:textSize="14sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/defaultShowColor"/>
+</RelativeLayout>

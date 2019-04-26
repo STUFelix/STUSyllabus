@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:title="功能">
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="选择壁纸"/>
+        <item
+            android:id="@+id/nav_save_syllabus"
+            android:icon="@drawable/ic_save_syllabus"
+            android:title="保存课表"/>
+
+    </group>
+
+    <item android:title="功能">
+        <menu>
+            <item
+                android:id="@+id/nav_add_lesson"
+                android:icon="@drawable/ic_add_lesson"
+                android:title="添加课程(未完成)"/>
+
+            <item
+                android:id="@+id/nav_syllabus_collection"
+                android:icon="@drawable/ic_syllabus_collection"
+                android:title="课表收集(未完成)"/>
+
+        </menu>
+    </item>
+
+</menu>

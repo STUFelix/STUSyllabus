@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detailContentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/defaultLightBackground"
+    android:orientation="vertical"
+    android:paddingBottom="32dp"
+    android:paddingTop="32dp">
+
+    <com.example.daidaijie.syllabusapplication.widget.LessonDetailLayout
+        android:id="@+id/lessonNumberLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:descText="班号"
+        app:detailIcon="@drawable/ic_id_lesson"
+        app:titltText="67564">
+    </com.example.daidaijie.syllabusapplication.widget.LessonDetailLayout>
+
+    <com.example.daidaijie.syllabusapplication.widget.LessonDetailLayout
+        android:id="@+id/lessonCreditLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:descText="学分"
+        app:detailIcon="@drawable/ic_credit_lesson"
+        app:titltText="2.0">
+    </com.example.daidaijie.syllabusapplication.widget.LessonDetailLayout>
+
+    <com.example.daidaijie.syllabusapplication.widget.LessonDetailLayout
+        android:id="@+id/lessonRoomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:descText="教室"
+        app:detailIcon="@drawable/ic_place_lesson"
+        app:titltText="D505">
+    </com.example.daidaijie.syllabusapplication.widget.LessonDetailLayout>
+
+    <com.example.daidaijie.syllabusapplication.widget.LessonDetailLayout
+        android:id="@+id/lessonTeacherLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:descText="教师"
+        app:detailIcon="@drawable/ic_teacher_lesson"
+        app:titltText="方若宇">
+    </com.example.daidaijie.syllabusapplication.widget.LessonDetailLayout>
+
+    <com.example.daidaijie.syllabusapplication.widget.LessonDetailLayout
+        android:id="@+id/lessonTimeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:descText="时间"
+        app:detailIcon="@drawable/ic_time_lesson"
+        app:titltText="1-16周 , AB">
+    </com.example.daidaijie.syllabusapplication.widget.LessonDetailLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical">
+        <!--<ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"/>-->
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/lessonRipple"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:mrl_rippleAlpha="0.1"
+            app:mrl_rippleColor="#000000"
+            app:mrl_rippleDuration="500"
+            app:mrl_rippleOverlay="true"
+            app:mrl_rippleRoundedCorners="4dp">
+
+            <Button
+                android:id="@+id/showClassMateButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_show_classmate"
+                android:elevation="8dp"
+                android:text="查看班级同学"
+                android:textColor="@color/material_white"
+                android:textSize="16sp"
+                tools:targetApi="lollipop" />
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/lessonRipple1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mrl_rippleAlpha="0.1"
+            app:mrl_rippleColor="#000000"
+            app:mrl_rippleDuration="500"
+            app:mrl_rippleOverlay="true"
+            app:mrl_rippleRoundedCorners="4dp">
+
+            <Button
+                android:id="@+id/courseEvaluationButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_show_classmate"
+                android:elevation="8dp"
+                android:text="课程评价"
+                android:textColor="@color/material_white"
+                android:textSize="16sp"
+                tools:targetApi="lollipop" />
+        </com.balysv.materialripple.MaterialRippleLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/defaultDarkBackground"
+    android:orientation="vertical"
+    tools:context="com.example.daidaijie.syllabusapplication.schoolDymatic.circle.postContent.PostContentActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="?attr/colorPrimary"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true"
+        android:gravity="center_vertical"
+        android:popupTheme="@style/AppTheme.PopupOverlay"
+        android:theme="@style/AppTheme.PopupOverlay"
+        android:transitionName="tool_bar"
+        app:titleTextColor="@android:color/white"
+        tools:targetApi="lollipop">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:singleLine="true"
+            android:text="发布动态"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/material_white"
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
+
+        <EditText
+            android:id="@+id/titleEditText"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@color/material_white"
+            android:gravity="top"
+            android:hint="请输入标题"
+            android:maxLength="140"
+            android:maxLines="10"
+            android:padding="8dp"
+            android:textColor="@color/defaultTextColor"
+            android:textColorHint="@color/defaultShowColor"
+            android:textSize="16sp" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/defaultShowColor" />
+
+        <EditText
+            android:id="@+id/contentEditText"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="@color/material_white"
+            android:gravity="top|left"
+            android:hint="输入你想分享的内容吧(140字)..."
+            android:maxLength="140"
+            android:maxLines="10"
+            android:padding="8dp"
+            android:textColor="@color/defaultTextColor"
+            android:textColorHint="@color/defaultShowColor"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="添加照片"
+            android:textColor="@color/defaultShowColor"
+            android:textSize="16sp"/>
+
+        <com.example.daidaijie.syllabusapplication.widget.FlowLabelLayout
+            android:id="@+id/postImgFlowLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            app:LayoutType="1">
+        </com.example.daidaijie.syllabusapplication.widget.FlowLabelLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/defaultShowColor"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:text="发布平台"
+        android:textColor="@color/defaultShowColor"
+        android:textSize="16sp" />
+
+    <RadioGroup
+        android:layout_marginTop="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:background="@color/material_white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/postAsAndroidButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:checked="true"
+            android:text="Android"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="14sp"
+            app:buttonTint="?attr/colorPrimary"/>
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/postAsOtherButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="火星"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="14sp"
+            app:buttonTint="?attr/colorPrimary"/>
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/postAsPhoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:ellipsize="end"
+            android:maxLength="16"
+            android:text="Android"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="14sp"
+            app:buttonTint="?attr/colorPrimary"/>
+
+    </RadioGroup>
+
+</LinearLayout>

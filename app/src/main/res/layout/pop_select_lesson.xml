@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <android.support.v4.view.ViewPager
+        android:layout_marginTop="120dp"
+        android:layout_marginBottom="120dp"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="96dp"
+        android:layout_marginRight="96dp"
+        android:id="@+id/selectLessonPager"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:clipChildren="false">
+    </android.support.v4.view.ViewPager>
+
+
+
+</RelativeLayout>
